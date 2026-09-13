@@ -13,6 +13,7 @@
       height: 100%;
       background: #000;
       overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
     }
     iframe {
       position: absolute;
@@ -22,14 +23,24 @@
       border: 0;
       display: block;
     }
-    /* Pop-out button */
-    #popout {
+
+    /* Floating action bar — top right */
+    #actions {
       position: absolute;
       top: 8px;
       right: 8px;
       z-index: 10;
+      display: flex;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    body:hover #actions,
+    #actions.pinned { opacity: 1; }
+
+    /* Buttons */
+    .btn {
       padding: 6px 10px;
-      font-family: system-ui, -apple-system, sans-serif;
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.05em;
@@ -39,31 +50,60 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 4px;
       cursor: pointer;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
     }
-    #popout:hover {
+    .btn:hover {
       background: rgba(0, 194, 186, 0.9);
       border-color: #00C2BA;
     }
-    #popout:active {
+    .btn:active {
       transform: translateY(1px);
     }
+
+    /* Popout mode styling */
+    body.popout #actions {
+      opacity: 1;
+    }
+    body.popout .btn-close {
+      background: rgba(220, 60, 60, 0.85);
+      border-color: rgba(220, 60, 60, 0.9);
+    }
+    body.popout .btn-close:hover {
+      background: rgba(240, 70, 70, 1);
+    }
+
+    /* Error state */
     .error {
       color: #8B9DB5;
-      font-family: system-ui, sans-serif;
       text-align: center;
       padding-top: 40vh;
       font-size: 14px;
+    }
+
+    /* Small padding adjustment when in popout for the top bar */
+    body.popout iframe {
+      top: 0;
     }
   </style>
 </head>
 <body>
   <div id="root"></div>
-  <button id="popout" style="display: none;">⧉ Pop Out</button>
+
+  <div id="actions">
+    <button class="btn btn-popout" id="popoutBtn" style="display: none;">⧉ Pop Out</button>
+    <button class="btn btn-return" id="returnBtn" style="display: none;">↩ Return to App</button>
+    <button class="btn btn-close" id="closeBtn" style="display: none;">✕ Close</button>
+  </div>
+
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
       var id = params.get('v');
+      var isPopout = params.get('popout') === '1';
+      var autoplay = isPopout ? '1' : (params.get('autoplay') || '1');
+      var mute = params.get('mute') || '1';
 
       if (!id || !/^[A-Za-z0-9_-]{6,}$/.test(id)) {
         document.getElementById('root').innerHTML =
@@ -71,9 +111,17 @@
         return;
       }
 
-      var src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
-        '?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&origin=' +
-        encodeURIComponent(window.location.origin);
+      // Build the YouTube embed URL
+      var embedParams = new URLSearchParams({
+        autoplay: autoplay,
+        mute: mute,
+        rel: '0',
+        modestbranding: '1',
+        playsinline: '1',
+        origin: window.location.origin,
+      });
+      var src = 'https://www.youtube-nocookie.com/embed/' +
+        encodeURIComponent(id) + '?' + embedParams.toString();
 
       var iframe = document.createElement('iframe');
       iframe.src = src;
@@ -83,26 +131,53 @@
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       document.getElementById('root').appendChild(iframe);
 
-      // Show + wire up the Pop Out button (only when we're in a normal page, not already popped out)
-      var isPoppedOut = params.get('popout') === '1';
-      var btn = document.getElementById('popout');
-      if (!isPoppedOut) {
-        btn.style.display = 'block';
-        btn.addEventListener('click', function () {
-          var url = window.location.origin + window.location.pathname +
-            '?v=' + encodeURIComponent(id) + '&popout=1';
+      // ── Popout mode ──
+      if (isPopout) {
+        document.body.classList.add('popout');
+        document.getElementById('closeBtn').style.display = 'block';
+        document.getElementById('returnBtn').style.display = 'block';
 
-          // Open a small always-on-top-ish floating window
-          var w = window.open(
-            url,
-            'mediavault-miniplayer',
-            'width=480,height=300,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=no'
-          );
-
-          // Focus it
-          if (w) w.focus();
+        document.getElementById('closeBtn').addEventListener('click', function () {
+          window.close();
         });
+
+        document.getElementById('returnBtn').addEventListener('click', function () {
+          // Bring opener window to focus, then close this one
+          try {
+            if (window.opener && !window.opener.closed) {
+              window.opener.focus();
+            }
+          } catch (e) { /* ignore */ }
+          window.close();
+        });
+
+        // Auto-size the window to match 16:9 video aspect
+        // (only works if the window was opened by us and we have control)
+        try {
+          var targetW = 480;
+          var targetH = Math.round(targetW * (9 / 16)) + 40; // +40 for title bar
+          window.resizeTo(targetW, targetH);
+        } catch (e) { /* ignore */ }
+
+        return;
       }
+
+      // ── Normal (embedded) mode ──
+      var popoutBtn = document.getElementById('popoutBtn');
+      popoutBtn.style.display = 'block';
+
+      popoutBtn.addEventListener('click', function () {
+        var url = window.location.origin + window.location.pathname +
+          '?v=' + encodeURIComponent(id) + '&popout=1';
+
+        var w = window.open(
+          url,
+          'mediavault-miniplayer',
+          'width=480,height=310,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=no'
+        );
+
+        if (w) w.focus();
+      });
     })();
   </script>
 </body>
