@@ -181,13 +181,14 @@
         return;
       }
 
-      // Build the YouTube embed URL
+      // Build the YouTube embed URL — enablejsapi is required for postMessage
       var embedParams = new URLSearchParams({
         autoplay: autoplay,
         mute: mute,
         rel: '0',
         modestbranding: '1',
         playsinline: '1',
+        enablejsapi: '1',
         origin: window.location.origin,
       });
       var src = 'https://www.youtube-nocookie.com/embed/' +
@@ -200,6 +201,37 @@
       iframe.setAttribute('allowfullscreen', '');
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       document.getElementById('root').appendChild(iframe);
+
+      // ── Auto-unmute on first user interaction ──
+      // Chromium blocks audio until the user has interacted with the page.
+      // The video autoplays muted; the FIRST click anywhere on the relay
+      // sends an unMute command via the YouTube iframe API.
+      var didUnmute = false;
+
+      function unmuteOnce() {
+        if (didUnmute) return;
+        didUnmute = true;
+        try {
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+            '*'
+          );
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
+            '*'
+          );
+        } catch (e) {
+          /* ignore cross-origin or timing errors */
+        }
+        // Clean up — one click is enough
+        document.removeEventListener('click', unmuteOnce, true);
+        document.removeEventListener('touchstart', unmuteOnce, true);
+        document.removeEventListener('keydown', unmuteOnce, true);
+      }
+
+      document.addEventListener('click', unmuteOnce, true);
+      document.addEventListener('touchstart', unmuteOnce, true);
+      document.addEventListener('keydown', unmuteOnce, true);
 
       // ── Popout mode ──
       if (isPopout) {
