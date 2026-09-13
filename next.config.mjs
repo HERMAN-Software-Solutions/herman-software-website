@@ -28,7 +28,7 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Content-Security-Policy", value: "frame-ancestors 'self' app: https://herman-software-website.vercel.app" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self' http://localhost:* app: https://herman-software-website.vercel.app" },
           { key: "X-XSS-Protection", value: "1; mode=block" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
