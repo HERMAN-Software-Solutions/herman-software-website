@@ -22,6 +22,32 @@
       border: 0;
       display: block;
     }
+    /* Pop-out button */
+    #popout {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 10;
+      padding: 6px 10px;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    #popout:hover {
+      background: rgba(0, 194, 186, 0.9);
+      border-color: #00C2BA;
+    }
+    #popout:active {
+      transform: translateY(1px);
+    }
     .error {
       color: #8B9DB5;
       font-family: system-ui, sans-serif;
@@ -33,6 +59,7 @@
 </head>
 <body>
   <div id="root"></div>
+  <button id="popout" style="display: none;">⧉ Pop Out</button>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
@@ -51,10 +78,31 @@
       var iframe = document.createElement('iframe');
       iframe.src = src;
       iframe.setAttribute('allow',
-        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
       iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
       document.getElementById('root').appendChild(iframe);
+
+      // Show + wire up the Pop Out button (only when we're in a normal page, not already popped out)
+      var isPoppedOut = params.get('popout') === '1';
+      var btn = document.getElementById('popout');
+      if (!isPoppedOut) {
+        btn.style.display = 'block';
+        btn.addEventListener('click', function () {
+          var url = window.location.origin + window.location.pathname +
+            '?v=' + encodeURIComponent(id) + '&popout=1';
+
+          // Open a small always-on-top-ish floating window
+          var w = window.open(
+            url,
+            'mediavault-miniplayer',
+            'width=480,height=300,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=no'
+          );
+
+          // Focus it
+          if (w) w.focus();
+        });
+      }
     })();
   </script>
 </body>
