@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>MediaVault Embed Relay</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    .error {
+      color: #8B9DB5;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+      padding-top: 40vh;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('v');
+
+      if (!id || !/^[A-Za-z0-9_-]{6,}$/.test(id)) {
+        document.getElementById('root').innerHTML =
+          '<div class="error">No valid video ID provided.</div>';
+        return;
+      }
+
+      var src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+        '?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&origin=' +
+        encodeURIComponent(window.location.origin);
+
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.setAttribute('allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      document.getElementById('root').appendChild(iframe);
+    })();
+  </script>
+</body>
+</html>
