@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -24,35 +24,41 @@
       display: block;
     }
 
-    /* Floating action bar — top right */
+    /* Floating action bar — mid-right, vertical stack */
     #actions {
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 50%;
+      right: 6px;
+      transform: translateY(-50%);
       z-index: 10;
       display: flex;
+      flex-direction: column;
       gap: 6px;
       opacity: 0;
       transition: opacity 0.2s ease;
     }
     body:hover #actions,
+    body.popout #actions,
     #actions.pinned { opacity: 1; }
 
     /* Buttons */
     .btn {
-      padding: 6px 10px;
-      font-size: 11px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
       color: #fff;
-      background: rgba(0, 0, 0, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.15s ease;
       backdrop-filter: blur(4px);
-      white-space: nowrap;
+      line-height: 1;
     }
     .btn:hover {
       background: rgba(0, 194, 186, 0.9);
@@ -92,9 +98,9 @@
   <div id="root"></div>
 
   <div id="actions">
-    <button class="btn btn-popout" id="popoutBtn" style="display: none;">⧉ Pop Out</button>
-    <button class="btn btn-return" id="returnBtn" style="display: none;">↩ Return to App</button>
-    <button class="btn btn-close" id="closeBtn" style="display: none;">✕ Close</button>
+    <button class="btn btn-popout" id="popoutBtn" style="display: none;">⧉</button>
+    <button class="btn btn-return" id="returnBtn" style="display: none;">↩</button>
+    <button class="btn btn-close" id="closeBtn" style="display: none;">✕</button>
   </div>
 
   <script>
@@ -134,31 +140,8 @@
       // ── Popout mode ──
       if (isPopout) {
         document.body.classList.add('popout');
-        document.getElementById('closeBtn').style.display = 'block';
-        document.getElementById('returnBtn').style.display = 'block';
-
-        document.getElementById('closeBtn').addEventListener('click', function () {
-          window.close();
-        });
-
-        document.getElementById('returnBtn').addEventListener('click', function () {
-          // Bring opener window to focus, then close this one
-          try {
-            if (window.opener && !window.opener.closed) {
-              window.opener.focus();
-            }
-          } catch (e) { /* ignore */ }
-          window.close();
-        });
-
-        // Auto-size the window to match 16:9 video aspect
-        // (only works if the window was opened by us and we have control)
-        try {
-          var targetW = 480;
-          var targetH = Math.round(targetW * (9 / 16)) + 40; // +40 for title bar
-          window.resizeTo(targetW, targetH);
-        } catch (e) { /* ignore */ }
-
+        // Buttons stay hidden in popout mode — the OS window title bar
+        // provides its own close button. Cleaner, no overlap with controls.
         return;
       }
 
