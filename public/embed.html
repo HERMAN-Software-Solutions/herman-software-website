@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>MediaVault Embed Relay</title>
+<script src="https://apis.google.com/js/platform.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -80,6 +81,31 @@
       background: rgba(240, 70, 70, 1);
     }
 
+    /* Subscribe bar */
+    #subbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+      backdrop-filter: blur(6px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      z-index: 9;
+    }
+    #subbar .g-ytsubscribe {
+      transform: scale(0.95);
+      transform-origin: center;
+    }
+    /* Hide the subscribe bar in popout mode */
+    body.popout #subbar {
+      display: none;
+    }
+
     /* Error state */
     .error {
       color: #8B9DB5;
@@ -96,6 +122,16 @@
 </head>
 <body>
   <div id="root"></div>
+
+  <div id="subbar">
+    <div
+      class="g-ytsubscribe"
+      data-channel="HermanSoftwareSolutions"
+      data-layout="default"
+      data-count="default"
+      data-theme="dark"
+    ></div>
+  </div>
 
   <div id="actions">
     <button class="btn btn-popout" id="popoutBtn" style="display: none;">⧉</button>
