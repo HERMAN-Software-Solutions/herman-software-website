@@ -233,6 +233,26 @@
       document.addEventListener('touchstart', unmuteOnce, true);
       document.addEventListener('keydown', unmuteOnce, true);
 
+      // ── Forward commands from the parent (MediaVault) to the inner YouTube iframe ──
+      // The parent sends { event: 'command', func: 'unMute', args: [] }, which the
+      // YouTube player understands — but it must be re-posted to the *inner* iframe.
+      window.addEventListener('message', function (e) {
+        try {
+          // Only forward if it's actually a YouTube-API-shaped command
+          var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+          if (data && data.event === 'command') {
+            iframe.contentWindow.postMessage(
+              JSON.stringify(data),
+              '*'
+            );
+          }
+        } catch (err) {
+          /* ignore parse errors */
+        }
+      });
+      document.addEventListener('touchstart', unmuteOnce, true);
+      document.addEventListener('keydown', unmuteOnce, true);
+
       // ── Popout mode ──
       if (isPopout) {
         document.body.classList.add('popout');
