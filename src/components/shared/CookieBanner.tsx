@@ -15,11 +15,19 @@ export function CookieBanner() {
   const acceptAll = () => {
     localStorage.setItem("cookie-consent", "accepted");
     setVisible(false);
+    // Notify listeners (GA init script picks this up)
+    window.dispatchEvent(
+      new CustomEvent("cookie-consent-changed", { detail: "accepted" })
+    );
   };
 
   const decline = () => {
     localStorage.setItem("cookie-consent", "declined");
     setVisible(false);
+    // Notify listeners that consent was declined
+    window.dispatchEvent(
+      new CustomEvent("cookie-consent-changed", { detail: "declined" })
+    );
   };
 
   if (!visible) return null;

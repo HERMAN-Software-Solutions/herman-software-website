@@ -109,41 +109,71 @@ export default function RootLayout({
           }}
         />
 
+        {/* Theme initialization — runs before paint to prevent flash */}
         <script
           id="theme-init"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                var theme = localStorage.getItem('theme');
-                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
+                try {
+                  var stored = localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var shouldBeDark = stored === 'dark' || (stored !== 'light' && prefersDark);
+                  if (shouldBeDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                  }
                 }
               })();
             `,
           }}
         />
 
+        {/* Google Analytics — consent-based */}
         <script
           id="ga-init"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                var consent = localStorage.getItem('cookie-consent');
-                if (consent === 'accepted') {
-                  var gaId = '${process.env.NEXT_PUBLIC_GA_ID || ""}';
-                  if (gaId) {
-                    var script = document.createElement('script');
-                    script.async = true;
-                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-                    document.head.appendChild(script);
+                var GA_ID = '${process.env.NEXT_PUBLIC_GA_ID || ""}';
+                if (!GA_ID) return;
 
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', gaId);
+                function initGA() {
+                  if (window.__ga_initialized) return;
+                  window.__ga_initialized = true;
+
+                  var script = document.createElement('script');
+                  script.async = true;
+                  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                  document.head.appendChild(script);
+
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){window.dataLayer.push(arguments);}
+                  window.gtag = gtag;
+
+                  gtag('js', new Date());
+                  gtag('config', GA_ID, { anonymize_ip: true });
+                }
+
+                try {
+                  if (localStorage.getItem('cookie-consent') === 'accepted') {
+                    initGA();
                   }
+
+                  window.addEventListener('cookie-consent-changed', function(e) {
+                    if (e.detail === 'accepted') {
+                      initGA();
+                    }
+                  });
+                } catch (err) {
+                  // localStorage disabled — GA stays off until user consents via UI
                 }
               })();
             `,
