@@ -123,11 +123,11 @@ export function AmenityMap() {
   };
 
   return (
-    <section className="section-padding bg-gray-light">
+    <section className="section-padding bg-surface-alt">
       <div className="container-site">
         <div className="text-center mb-8">
-          <h2 className="text-h3 text-navy mb-2">Explore Around Our Office</h2>
-          <p className="text-body text-charcoal max-w-xl mx-auto">
+          <h2 className="text-h3 text-heading mb-2">Explore Around Our Office</h2>
+          <p className="text-body text-foreground max-w-xl mx-auto">
             Discover nearby restaurants, cafes, parks, and more around our Jinja office.
           </p>
         </div>
@@ -140,7 +140,7 @@ export function AmenityMap() {
               className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
                 selectedAmenity === amenity.value
                   ? "bg-teal text-white shadow-md"
-                  : "bg-white text-charcoal border border-gray-light hover:border-teal hover:text-teal"
+                  : "bg-surface text-foreground border border-gray-light hover:border-teal hover:text-teal"
               }`}
             >
               {amenity.label}
@@ -154,7 +154,7 @@ export function AmenityMap() {
               <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100 rounded-xl">
                 <div className="text-center">
                   <div className="w-8 h-8 border-2 border-teal border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                  <p className="text-sm text-charcoal">Loading map...</p>
+                  <p className="text-sm text-foreground">Loading map...</p>
                 </div>
               </div>
             )}
@@ -166,8 +166,8 @@ export function AmenityMap() {
             <div ref={mapRef} style={{ width: "100%", height: "400px" }} />
           </div>
 
-          <div className="bg-white rounded-xl border border-gray-light p-4 max-h-[400px] overflow-y-auto">
-            <h4 className="text-h5 font-semibold text-navy mb-3">
+          <div className="bg-surface rounded-xl border border-gray-light p-4 max-h-[400px] overflow-y-auto">
+            <h4 className="text-h5 font-semibold text-heading mb-3">
               Nearby {AMENITY_TYPES.find((a) => a.value === selectedAmenity)?.label}
             </h4>
             {places.length > 0 ? (
@@ -176,8 +176,8 @@ export function AmenityMap() {
                   <li key={i} className="flex gap-3 pb-3 border-b border-gray-light last:border-0">
                     <span className="text-lg flex-shrink-0">{AMENITY_TYPES.find((a) => a.value === selectedAmenity)?.icon}</span>
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-navy truncate">{place.name}</p>
-                      <p className="text-xs text-charcoal truncate">{place.vicinity}</p>
+                      <p className="text-sm font-medium text-heading truncate">{place.name}</p>
+                      <p className="text-xs text-foreground truncate">{place.vicinity}</p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs text-yellow-600">⭐ {place.rating || "N/A"}</span>
                         <span className="text-xs text-gray-medium">({place.user_ratings_total || 0} reviews)</span>
@@ -187,7 +187,7 @@ export function AmenityMap() {
                 ))}
               </ul>
             ) : !loading && (
-              <p className="text-sm text-charcoal text-center py-8">No places found nearby.</p>
+              <p className="text-sm text-foreground text-center py-8">No places found nearby.</p>
             )}
           </div>
         </div>

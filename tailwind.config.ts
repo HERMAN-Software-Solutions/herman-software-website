@@ -10,20 +10,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Brand colors — theme-aware via CSS variables
         navy: {
-          DEFAULT: "#0A1F3F",
-          light: "#132F52",
-          dark: "#07182E",
+          DEFAULT: "var(--navy)",
+          light: "var(--navy-light)",
+          dark: "var(--navy-dark)",
         },
         teal: {
-          DEFAULT: "#00C2BA",
-          dark: "#00A8A0",
+          DEFAULT: "var(--teal)",
+          dark: "var(--teal-dark)",
         },
-        charcoal: "#2D3748",
+        charcoal: "var(--charcoal)",
         gray: {
-          light: "#F8F9FA",
-          medium: "#A0AEC0",
+          light: "var(--gray-light)",
+          medium: "var(--gray-medium)",
         },
+
+        // Semantic tokens for surfaces and text
+        surface: {
+          DEFAULT: "var(--surface)",
+          alt: "var(--surface-alt)",
+        },
+        foreground: "var(--foreground)",
+        heading: "var(--heading)",
+
+        // Status colors (unchanged — work in both modes)
         success: "#38A169",
         warning: "#D69E2E",
         error: "#E53E3E",

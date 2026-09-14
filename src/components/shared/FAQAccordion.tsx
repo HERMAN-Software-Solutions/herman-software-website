@@ -28,7 +28,7 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
             className="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-gray-light/50"
             aria-expanded={openIndex === index}
           >
-            <span className="text-body font-medium text-navy pr-4">{faq.question}</span>
+            <span className="text-body font-medium text-heading pr-4">{faq.question}</span>
             <svg
               className={cn(
                 "h-5 w-5 flex-shrink-0 text-teal transition-transform duration-200",
@@ -43,7 +43,7 @@ export function FAQAccordion({ faqs, className }: FAQAccordionProps) {
           </button>
           {openIndex === index && (
             <div className="px-6 pb-4">
-              <p className="text-body text-charcoal leading-relaxed">{faq.answer}</p>
+              <p className="text-body text-foreground leading-relaxed">{faq.answer}</p>
             </div>
           )}
         </div>

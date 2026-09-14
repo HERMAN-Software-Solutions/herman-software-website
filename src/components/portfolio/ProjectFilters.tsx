@@ -23,7 +23,7 @@ export function ProjectFilters({
             "rounded-full px-5 py-2 text-body-sm font-medium transition-all duration-200",
             activeCategory === category
               ? "bg-teal text-white shadow-button"
-              : "border border-gray-medium/30 bg-white text-charcoal hover:border-teal hover:text-teal"
+              : "border border-gray-medium/30 bg-surface text-foreground hover:border-teal hover:text-teal"
           )}
         >
           {category}

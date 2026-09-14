@@ -27,8 +27,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.shortName}`,
+    default: `${siteConfig.name} - ${siteConfig.tagline}`,
+    template: `%s - ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
   keywords: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     locale: "en_UG",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [
       {
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
   },
-    icons: {
+  icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
@@ -101,13 +101,17 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
+
         <script
+          id="theme-init"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -119,8 +123,10 @@ export default function RootLayout({
             `,
           }}
         />
-        {/* Google Analytics — Consent-based */}
+
         <script
+          id="ga-init"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -132,7 +138,7 @@ export default function RootLayout({
                     script.async = true;
                     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
                     document.head.appendChild(script);
-                    
+
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
@@ -143,20 +149,22 @@ export default function RootLayout({
             `,
           }}
         />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-           __html: JSON.stringify(generateOrganizationSchema()),
+            __html: JSON.stringify(generateOrganizationSchema()),
           }}
         />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateSoftwareAppSchema()),
-         }}
+          }}
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-white text-charcoal dark:bg-navy-dark dark:text-gray-light transition-colors">
+      <body className="flex min-h-screen flex-col bg-surface text-foreground dark:bg-navy-dark dark:text-foreground transition-colors">
         <SkipLink />
         <Header />
         <main id="main-content" className="flex-1" tabIndex={-1}>
@@ -168,58 +176,56 @@ export default function RootLayout({
         <WhatsAppButton />
         <BackToTop />
 
-        {/* Tawk.to Live Chat — Lazy Loaded */}
-<script
-  dangerouslySetInnerHTML={{
-    __html: `
-      // Load Tawk.to after page is fully loaded + 3 second delay
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-          
-          Tawk_API.onLoad = function(){
-            // Suppress performance logging CORS errors
-            Tawk_API.logPerformance = function(){};
-            
-            var visitorId = localStorage.getItem('tawk_visitor');
-            if (visitorId) {
-              Tawk_API.setAttributes({ id: visitorId }, function(){});
-            } else {
-              var newId = 'v_' + Date.now();
-              localStorage.setItem('tawk_visitor', newId);
-              Tawk_API.setAttributes({ id: newId }, function(){});
-            }
-            
-            // Proactive chat after 45 seconds on pricing/quote pages
-            var proactivePages = ['/get-quote', '/pricing', '/services', '/contact'];
-            var currentPath = window.location.pathname;
-            if (proactivePages.some(function(p) { return currentPath.startsWith(p); })) {
-              setTimeout(function() {
-                Tawk_API.maximize();
-              }, 45000);
-            }
-          };
-          
-          // Track page views for analytics
-          Tawk_API.onChatStarted = function(){
-            if (typeof gtag !== 'undefined') {
-              gtag('event', 'chat_started', { event_category: 'engagement' });
-            }
-          };
-          
-          (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/6a031e36b31dab1c398e1064/1joe2s2dm';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-          })();
-        }, 3000); // 3 second delay
-      });
-    `,
-  }}
-/>
+        <script
+          id="tawk-init"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('load', function() {
+                setTimeout(function() {
+                  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+
+                  Tawk_API.onLoad = function(){
+                    Tawk_API.logPerformance = function(){};
+
+                    var visitorId = localStorage.getItem('tawk_visitor');
+                    if (visitorId) {
+                      Tawk_API.setAttributes({ id: visitorId }, function(){});
+                    } else {
+                      var newId = 'v_' + Date.now();
+                      localStorage.setItem('tawk_visitor', newId);
+                      Tawk_API.setAttributes({ id: newId }, function(){});
+                    }
+
+                    var proactivePages = ['/get-quote', '/pricing', '/services', '/contact'];
+                    var currentPath = window.location.pathname;
+                    if (proactivePages.some(function(p) { return currentPath.startsWith(p); })) {
+                      setTimeout(function() {
+                        Tawk_API.maximize();
+                      }, 45000);
+                    }
+                  };
+
+                  Tawk_API.onChatStarted = function(){
+                    if (typeof gtag !== 'undefined') {
+                      gtag('event', 'chat_started', { event_category: 'engagement' });
+                    }
+                  };
+
+                  (function(){
+                    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                    s1.async=true;
+                    s1.src='https://embed.tawk.to/6a031e36b31dab1c398e1064/1joe2s2dm';
+                    s1.charset='UTF-8';
+                    s1.setAttribute('crossorigin','*');
+                    s0.parentNode.insertBefore(s1,s0);
+                  })();
+                }, 3000);
+              });
+            `,
+          }}
+        />
+
         <CookieBanner />
         <SpeedInsights />
       </body>

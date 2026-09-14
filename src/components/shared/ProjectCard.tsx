@@ -36,10 +36,10 @@ export function ProjectCard({ title, sector, challenge, result, href, thumbnail 
 
       {/* Content */}
       <div className="flex flex-1 flex-col gap-2 p-4">
-        <h3 className="text-h5 font-semibold text-navy group-hover:text-teal transition-colors line-clamp-1">
+        <h3 className="text-h5 font-semibold text-heading group-hover:text-teal transition-colors line-clamp-1">
           {title}
         </h3>
-        <p className="text-body-sm text-charcoal line-clamp-2 leading-relaxed">
+        <p className="text-body-sm text-foreground line-clamp-2 leading-relaxed">
           {challenge}
         </p>
         <div className="mt-auto flex items-center justify-between border-t border-gray-light pt-3">

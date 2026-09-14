@@ -12,7 +12,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-navy">
+    <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-navy-dark">
       {/* Hexagon Pattern Overlay */}
       <div
         className="absolute inset-0 opacity-5"
@@ -30,14 +30,14 @@ export function HeroSection() {
         <h1 className="mx-auto max-w-4xl text-white">
           {settings?.heroTitle || "Engineered Software, Measurable Results — From Jinja, for the World"}
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-body-lg text-gray-medium">
+        <p className="mx-auto mt-6 max-w-2xl text-body-lg text-[#D1D5DB]">
           {settings?.heroDescription || "We design, develop, and deploy robust software systems — websites, mobile apps, and enterprise platforms — built on sound architecture and delivered with clear, collaborative communication."}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/our-work" variant="primary" className="min-w-[180px]">
             Explore Our Work
           </Button>
-          <Button href="/get-quote" variant="secondary" className="border-white text-white hover:bg-white hover:text-navy min-w-[180px]">
+          <Button href="/get-quote" variant="secondary" className="border-white text-white hover:bg-surface hover:text-heading min-w-[180px]">
             Request a Quote
           </Button>
         </div>

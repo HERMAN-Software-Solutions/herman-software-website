@@ -15,14 +15,14 @@ interface ProjectDetailProps {
 export function ProjectDetail({ project }: ProjectDetailProps) {
   return (
     <article>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <Badge className="mb-4 inline-block">{project.sector}</Badge>
           <h1 className="text-white">{project.title}</h1>
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-3xl">
           <div className="mb-10">
             <h2 className="mb-4 flex items-center gap-3">
@@ -33,7 +33,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </span>
               The Challenge
             </h2>
-            <p className="text-body text-charcoal">{project.challenge}</p>
+            <p className="text-body text-foreground">{project.challenge}</p>
           </div>
 
           <div className="mb-10">
@@ -45,7 +45,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </span>
               Our Approach
             </h2>
-            <p className="text-body text-charcoal">{project.solution}</p>
+            <p className="text-body text-foreground">{project.solution}</p>
           </div>
 
           <div className="mb-10 rounded-card border border-teal/20 bg-teal/5 p-6">
@@ -64,7 +64,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             <h3 className="mb-4">Technologies Used</h3>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
-                <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-navy">{tech}</span>
+                <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-heading">{tech}</span>
               ))}
             </div>
           </div>

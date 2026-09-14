@@ -30,20 +30,20 @@ export function BlogContent({ post }: BlogContentProps) {
           <span className="text-body-sm text-gray-medium">{post.date}</span>
         </div>
         <h1 className="mb-4">{post.title}</h1>
-        <p className="text-body-sm text-charcoal">By {post.author}</p>
+        <p className="text-body-sm text-foreground">By {post.author}</p>
       </div>
 
       {/* Article Body */}
       <div className="prose prose-lg max-w-none">
-        <p className="text-body-lg text-charcoal leading-relaxed">{post.excerpt}</p>
-        <p className="mt-6 text-body text-charcoal">
+        <p className="text-body-lg text-foreground leading-relaxed">{post.excerpt}</p>
+        <p className="mt-6 text-body text-foreground">
           This is the full article body. In the Sanity CMS, this section will be replaced
           with rich content supporting headings, code blocks, images, and formatted text.
         </p>
-        <p className="mt-4 text-body text-charcoal">
+        <p className="mt-4 text-body text-foreground">
           When connected to Sanity Studio, the article content will be dynamically rendered
           here with full formatting support. For now, articles can be edited in{" "}
-          <code className="rounded bg-gray-light px-1.5 py-0.5 text-sm text-navy">
+          <code className="rounded bg-surface-alt px-1.5 py-0.5 text-sm text-heading">
             src/data/blog-posts.ts
           </code>
           .
@@ -52,12 +52,12 @@ export function BlogContent({ post }: BlogContentProps) {
 
       {/* Share Buttons */}
       <div className="mt-10 border-t border-gray-light pt-6">
-        <p className="mb-3 text-body-sm font-medium text-charcoal">Share this article</p>
+        <p className="mb-3 text-body-sm font-medium text-foreground">Share this article</p>
         <div className="flex gap-3">
           {/* LinkedIn */}
           <button
             onClick={() => handleShare("linkedin")}
-            className="rounded-md border border-gray-light p-2 text-charcoal hover:bg-gray-light transition-colors"
+            className="rounded-md border border-gray-light p-2 text-foreground hover:bg-surface-alt transition-colors"
             aria-label="Share on LinkedIn"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -70,7 +70,7 @@ export function BlogContent({ post }: BlogContentProps) {
           {/* Twitter/X */}
           <button
             onClick={() => handleShare("twitter")}
-            className="rounded-md border border-gray-light p-2 text-charcoal hover:bg-gray-light transition-colors"
+            className="rounded-md border border-gray-light p-2 text-foreground hover:bg-surface-alt transition-colors"
             aria-label="Share on Twitter"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -81,7 +81,7 @@ export function BlogContent({ post }: BlogContentProps) {
           {/* WhatsApp */}
           <button
             onClick={() => handleShare("whatsapp")}
-            className="rounded-md border border-gray-light p-2 text-charcoal hover:bg-gray-light transition-colors"
+            className="rounded-md border border-gray-light p-2 text-foreground hover:bg-surface-alt transition-colors"
             aria-label="Share on WhatsApp"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

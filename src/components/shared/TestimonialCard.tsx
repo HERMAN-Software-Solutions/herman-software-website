@@ -17,7 +17,7 @@ export function TestimonialCard({ name, role, quote, rating, avatar }: Testimoni
             {avatar ? (
               <img src={avatar} alt={name} className="h-full w-full object-cover" />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-sm font-bold text-navy">
+              <div className="flex h-full w-full items-center justify-center text-sm font-bold text-heading">
                 {name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)}
               </div>
             )}
@@ -39,9 +39,9 @@ export function TestimonialCard({ name, role, quote, rating, avatar }: Testimoni
           </div>
         )}
       </div>
-      <p className="text-body text-charcoal italic leading-relaxed">&ldquo;{quote}&rdquo;</p>
+      <p className="text-body text-foreground italic leading-relaxed">&ldquo;{quote}&rdquo;</p>
       <div className="mt-auto border-t border-gray-light pt-4">
-        <p className="text-body-sm font-semibold text-navy">{name}</p>
+        <p className="text-body-sm font-semibold text-heading">{name}</p>
         <p className="text-body-sm text-gray-medium">{role}</p>
       </div>
     </div>

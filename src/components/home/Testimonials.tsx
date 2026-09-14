@@ -22,7 +22,7 @@ export function Testimonials() {
   }, [testimonials.length]);
 
   return (
-    <section className="section-padding bg-gray-light">
+    <section className="section-padding bg-surface-alt">
       <div className="container-site">
         <SectionHeading
           title="What Our Clients Say"

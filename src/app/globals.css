@@ -2,10 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────
+   THEME VARIABLES
+   Light mode is default; .dark overrides
+   ───────────────────────────────────────────── */
 :root {
-  --color-navy: #0A1F3F;
-  --color-teal: #00C2BA;
-  --color-charcoal: #2D3748;
+  --navy: #0A1F3F;
+  --navy-light: #132F52;
+  --navy-dark: #07182E;
+  --teal: #00C2BA;
+  --teal-dark: #00A8A0;
+  --charcoal: #2D3748;
+  --gray-light: #F8F9FA;
+  --gray-medium: #A0AEC0;
+
+  --surface: #FAFAF9;
+  --surface-alt: #F1F1EF;
+  --foreground: #3A4553;
+  --heading: #0A1F3F;
+}
+
+.dark {
+  /* Brand palette (dark mode) — flip for readability */
+  --navy: #E8EDF5;          /* was dark blue → now light text */
+  --navy-light: #1A2B45;    /* surface highlight */
+  --navy-dark: #0A0F1C;     /* deepest background */
+  --teal: #00C2BA;          /* teal stays teal (brand) */
+  --teal-dark: #00A8A0;
+  --charcoal: #E5E7EB;      /* was dark gray → now light text */
+  --gray-light: #1F2937;    /* was near-white → now dark surface */
+  --gray-medium: #9CA3AF;   /* mid-gray works in both */
+
+  /* Semantic tokens (dark mode) */
+  --surface: #111827;
+  --surface-alt: #1F2937;
+  --foreground: #E5E7EB;
+  --heading: #F5F5F5;
 }
 
 @layer base {
@@ -17,22 +49,29 @@
 
   body {
     @apply font-sans text-base antialiased;
+    background-color: var(--surface);
+    color: var(--foreground);
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   h1 {
-    @apply text-3xl md:text-5xl font-bold text-navy dark:text-white leading-tight tracking-tight;
+    @apply text-3xl md:text-5xl font-bold leading-tight tracking-tight;
+    color: var(--heading);
   }
 
   h2 {
-    @apply text-2xl md:text-4xl font-bold text-navy dark:text-white leading-tight tracking-tight;
+    @apply text-2xl md:text-4xl font-bold leading-tight tracking-tight;
+    color: var(--heading);
   }
 
   h3 {
-    @apply text-xl md:text-2xl font-semibold text-navy dark:text-white;
+    @apply text-xl md:text-2xl font-semibold;
+    color: var(--heading);
   }
 
   h4 {
-    @apply text-lg font-semibold text-navy dark:text-white;
+    @apply text-lg font-semibold;
+    color: var(--heading);
   }
 
   :focus-visible {
@@ -40,7 +79,8 @@
   }
 
   ::selection {
-    @apply bg-teal/20 text-navy dark:text-white;
+    background-color: rgb(0 194 186 / 0.2);
+    color: var(--heading);
   }
 }
 
@@ -58,7 +98,44 @@
   }
 
   .card-base {
-    @apply bg-white dark:bg-navy border border-gray-light dark:border-navy-light rounded-card;
+    background-color: var(--surface);
+    border: 1px solid var(--gray-light);
+    @apply rounded-card;
+  }
+
+  /* ─── Prose (blog / MDX) dark-mode friendly ─── */
+  .prose {
+    color: var(--foreground);
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    color: var(--heading);
+  }
+  .prose p,
+  .prose li,
+  .prose strong {
+    color: var(--foreground);
+  }
+  .prose a {
+    color: var(--teal);
+  }
+  .prose code {
+    background: var(--surface-alt);
+    color: var(--heading);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  .prose pre {
+    background: var(--surface-alt);
+    border: 1px solid var(--gray-light);
+    color: var(--foreground);
+  }
+  .prose blockquote {
+    border-left-color: var(--teal);
+    color: var(--gray-medium);
   }
 }
 
@@ -70,7 +147,8 @@
     opacity: 0.05;
   }
 }
-        /* ── Print Styles ────────────────────────────── */
+
+/* ── Print Styles ────────────────────────────── */
 @media print {
   header,
   footer,

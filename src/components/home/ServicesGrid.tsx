@@ -50,7 +50,7 @@ export function ServicesGrid() {
   }, []);
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-surface">
       <div className="container-site">
         <SectionHeading
           title="What We Build"

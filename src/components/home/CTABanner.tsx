@@ -12,7 +12,7 @@ export function CTABanner() {
   }, []);
 
   return (
-    <section className="bg-navy py-16 md:py-20">
+    <section className="bg-navy-dark py-16 md:py-20">
       <div className="container-site text-center">
         <h2 className="text-white">Let&apos;s Talk About Your Requirements</h2>
         <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">

@@ -45,7 +45,7 @@ export function BlogCard({ title, date, excerpt, category, href }: BlogCardProps
           <span className="text-xs text-gray-medium">{formattedDate}</span>
         </div>
         <h3 className="text-h4 leading-snug transition-colors group-hover:text-teal">{title}</h3>
-        <p className="text-body-sm text-charcoal line-clamp-2">{excerpt}</p>
+        <p className="text-body-sm text-foreground line-clamp-2">{excerpt}</p>
         <div className="mt-auto flex items-center justify-between">
           <span className="text-body-sm font-medium text-teal group-hover:underline">
             Read article →

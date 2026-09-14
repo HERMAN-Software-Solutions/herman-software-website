@@ -68,7 +68,7 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">What We Build — And How We Build It</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -79,7 +79,7 @@ export default function ServicesPage() {
 
       {/* Service Detail Blocks */}
       {loading ? (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site space-y-12">
             {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="grid gap-12 lg:grid-cols-2">
@@ -87,7 +87,7 @@ export default function ServicesPage() {
                   <CardSkeleton />
                 </div>
                 <div>
-                  <div className="h-64 lg:h-80 bg-gray-light rounded-card animate-pulse" />
+                  <div className="h-64 lg:h-80 bg-surface-alt rounded-card animate-pulse" />
                 </div>
               </div>
             ))}
@@ -95,7 +95,7 @@ export default function ServicesPage() {
         </section>
       ) : (
         services.map((service, index) => (
-          <section key={service.title} className={`section-padding ${index % 2 === 0 ? "bg-white" : "bg-gray-light"}`}>
+          <section key={service.title} className={`section-padding ${index % 2 === 0 ? "bg-surface" : "bg-surface-alt"}`}>
             <div className="container-site">
               <div className="grid items-center gap-12 lg:grid-cols-2">
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
@@ -103,12 +103,12 @@ export default function ServicesPage() {
                     {iconMap[service.icon] || iconMap.code}
                   </div>
                   <h2 className="mb-4">{service.title}</h2>
-                  <p className="mb-4 text-body text-charcoal">{service.description}</p>
+                  <p className="mb-4 text-body text-foreground">{service.description}</p>
                   {service.features && service.features.length > 0 && (
                     <div className="mb-6">
                       <ul className="space-y-2">
                         {service.features.map((feature: string) => (
-                          <li key={feature} className="flex items-start gap-2 text-body-sm text-charcoal">
+                          <li key={feature} className="flex items-start gap-2 text-body-sm text-foreground">
                             <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                               <polyline points="20 6 9 17 4 12" />
                             </svg>
@@ -125,10 +125,10 @@ export default function ServicesPage() {
                 <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                   <div className="flex h-64 items-center justify-center rounded-card bg-navy/5 lg:h-80">
                     <div className="text-center">
-                      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-navy/10 text-navy">
+                      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-navy/10 text-heading">
                         {iconMap[service.icon] || iconMap.code}
                       </div>
-                      <p className="text-body-sm font-medium text-navy">{service.title}</p>
+                      <p className="text-body-sm font-medium text-heading">{service.title}</p>
                     </div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function ServicesPage() {
 
       {/* How We Work — From Sanity */}
       {processSteps.length > 0 && (
-        <section className="section-padding bg-navy text-white">
+        <section className="section-padding bg-navy-dark text-white">
           <div className="container-site">
             <SectionHeading
               title="Our Delivery Methodology"
@@ -178,10 +178,10 @@ export default function ServicesPage() {
         </section>
       )}
 
-      <section className="bg-white py-16 text-center">
+      <section className="bg-surface py-16 text-center">
         <div className="container-site">
           <h2>Not Sure Which Service Fits Your Needs?</h2>
-          <p className="mx-auto mt-4 max-w-xl text-body-lg text-charcoal">
+          <p className="mx-auto mt-4 max-w-xl text-body-lg text-foreground">
             Tell us about your project and we&apos;ll recommend the right approach — honestly.
           </p>
           <div className="mt-8">

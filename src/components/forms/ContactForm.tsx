@@ -50,7 +50,7 @@ export function ContactForm() {
           </svg>
         </div>
         <h3 className="mb-2">Message Sent!</h3>
-        <p className="text-charcoal">
+        <p className="text-foreground">
           Thank you for reaching out. We typically respond within 24 hours.
         </p>
       </div>

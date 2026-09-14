@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# local backup
+
+# Local backups (temporary - not for commit)
+src-backup/
+src-backup-*/
+*.backup
+*.bak.*

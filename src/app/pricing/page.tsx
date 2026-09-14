@@ -22,7 +22,7 @@ export default function PricingPage() {
 
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Pricing" }]} />
           <h1 className="text-white">Transparent Pricing</h1>
@@ -32,7 +32,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <SectionHeading
             title="What Does It Cost?"
@@ -59,11 +59,11 @@ export default function PricingPage() {
                     </span>
                   )}
                   <h3 className="text-h4 mb-2">{plan.name}</h3>
-                  <div className="mb-1 text-2xl font-bold text-navy dark:text-white">{plan.price}</div>
+                  <div className="mb-1 text-2xl font-bold text-heading dark:text-white">{plan.price}</div>
                   {plan.timeline && <p className="mb-6 text-body-sm text-gray-medium">{plan.timeline}</p>}
                   <ul className="mb-8 flex-1 space-y-2">
                     {plan.features?.map((feature: string) => (
-                      <li key={feature} className="flex items-start gap-2 text-body-sm text-charcoal">
+                      <li key={feature} className="flex items-start gap-2 text-body-sm text-foreground">
                         <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -81,7 +81,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-gray-light">
+      <section className="section-padding bg-surface-alt">
         <div className="container-site">
           <SectionHeading
             title="Not Sure What You Need?"
@@ -94,19 +94,19 @@ export default function PricingPage() {
       </section>
 
       {faqs.length > 0 && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site mx-auto max-w-3xl">
             <SectionHeading title="Frequently Asked Questions" subtitle="Common questions about our pricing and process." />
             <div className="space-y-4">
               {faqs.map((faq) => (
                 <details key={faq.question} className="card-base group">
-                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-charcoal dark:text-white">
+                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-foreground dark:text-white">
                     {faq.question}
                     <svg className="h-5 w-5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </summary>
-                  <p className="px-4 pb-4 text-body-sm text-charcoal dark:text-gray-medium">{faq.answer}</p>
+                  <p className="px-4 pb-4 text-body-sm text-foreground dark:text-gray-medium">{faq.answer}</p>
                 </details>
               ))}
             </div>
@@ -116,7 +116,7 @@ export default function PricingPage() {
 
       {/* Fallback hardcoded FAQs if Sanity has none */}
       {faqs.length === 0 && !loading && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site mx-auto max-w-3xl">
             <SectionHeading title="Frequently Asked Questions" subtitle="Common questions about our pricing and process." />
             <div className="space-y-4">
@@ -139,13 +139,13 @@ export default function PricingPage() {
                 },
               ].map((faq) => (
                 <details key={faq.q} className="card-base group">
-                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-charcoal dark:text-white">
+                  <summary className="flex cursor-pointer items-center justify-between p-4 font-medium text-foreground dark:text-white">
                     {faq.q}
                     <svg className="h-5 w-5 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </summary>
-                  <p className="px-4 pb-4 text-body-sm text-charcoal dark:text-gray-medium">{faq.a}</p>
+                  <p className="px-4 pb-4 text-body-sm text-foreground dark:text-gray-medium">{faq.a}</p>
                 </details>
               ))}
             </div>

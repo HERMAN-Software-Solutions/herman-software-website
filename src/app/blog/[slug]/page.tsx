@@ -34,13 +34,13 @@ export default function BlogPostPage() {
   if (loading) {
     return (
       <>
-        <section className="bg-navy py-20">
+        <section className="bg-navy-dark py-20">
           <div className="container-site">
             <Skeleton className="h-10 w-2/3 mb-4" />
             <Skeleton className="h-6 w-1/3" />
           </div>
         </section>
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site mx-auto max-w-3xl space-y-4">
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-full" />
@@ -53,10 +53,10 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <section className="section-padding bg-white text-center">
+      <section className="section-padding bg-surface text-center">
         <div className="container-site">
           <h1 className="mb-4">Article Not Found</h1>
-          <p className="text-charcoal mb-6">The article you're looking for doesn't exist.</p>
+          <p className="text-foreground mb-6">The article you're looking for doesn't exist.</p>
           <Button href="/blog" variant="primary">Back to Blog</Button>
         </div>
       </section>
@@ -96,7 +96,7 @@ export default function BlogPostPage() {
       </Head>
 
       {/* Hero */}
-      <section className="bg-navy py-16 md:py-20">
+      <section className="bg-navy-dark py-16 md:py-20">
         <div className="container-site">
           <Breadcrumbs
             items={[
@@ -118,7 +118,7 @@ export default function BlogPostPage() {
       </section>
 
       {/* Content */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <div className="mx-auto max-w-3xl">
             {/* Social Share */}
@@ -131,7 +131,7 @@ export default function BlogPostPage() {
 
             <div className="grid gap-10 lg:grid-cols-[1fr_200px]">
               {/* Article Body */}
-              <div className="prose prose-lg max-w-none prose-headings:text-navy prose-a:text-teal prose-strong:text-navy dark:prose-headings:text-white dark:prose-strong:text-white dark:prose-p:text-charcoal">
+              <div className="prose prose-lg max-w-none prose-headings:text-heading prose-a:text-teal prose-strong:text-heading dark:prose-headings:text-white dark:prose-strong:text-white dark:prose-p:text-foreground">
                 {post.body ? (
                   <PortableText value={post.body} />
                 ) : (
@@ -157,7 +157,7 @@ export default function BlogPostPage() {
 
       {/* Related Posts */}
       {relatedPosts.length > 0 && (
-        <section className="section-padding bg-gray-light">
+        <section className="section-padding bg-surface-alt">
           <div className="container-site">
             <h2 className="mb-8 text-center">Related Articles</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -177,7 +177,7 @@ export default function BlogPostPage() {
       )}
 
       {/* CTA */}
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h2 className="text-white">Enjoyed This Article?</h2>
           <p className="mx-auto mt-4 max-w-xl text-body-lg text-gray-medium">

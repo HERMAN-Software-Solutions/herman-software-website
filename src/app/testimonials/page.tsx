@@ -21,7 +21,7 @@ export default function TestimonialsPage() {
 
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Testimonials" }]} />
           <h1 className="text-white">What Our Clients Say</h1>
@@ -31,7 +31,7 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           {loading ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -49,7 +49,7 @@ export default function TestimonialsPage() {
         </div>
       </section>
 
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h2 className="text-white">Ready to Be Our Next Success Story?</h2>
           <p className="mx-auto mt-4 max-w-xl text-body-lg text-gray-medium">

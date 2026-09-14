@@ -25,16 +25,16 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[99999] border-t border-gray-light bg-white p-4 shadow-2xl dark:bg-navy-dark dark:border-navy-light">
+    <div className="fixed bottom-0 left-0 right-0 z-[99999] border-t border-gray-light bg-surface p-4 shadow-2xl dark:bg-navy-dark dark:border-navy-light">
       <div className="container-site flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-body-sm text-charcoal dark:text-gray-light max-w-2xl">
+        <p className="text-body-sm text-foreground dark:text-foreground max-w-2xl">
           We use cookies to analyze website traffic and improve your experience. By accepting, you agree to our{" "}
           <a href="/privacy-policy" className="text-teal hover:underline">Privacy Policy</a>.
         </p>
         <div className="flex gap-3 flex-shrink-0">
           <button
             onClick={decline}
-            className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-charcoal hover:bg-gray-light dark:text-gray-light dark:hover:bg-navy transition-colors"
+            className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-foreground hover:bg-surface-alt dark:text-foreground dark:hover:bg-navy-dark transition-colors"
           >
             Decline
           </button>

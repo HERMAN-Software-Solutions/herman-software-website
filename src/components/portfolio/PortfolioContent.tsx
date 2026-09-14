@@ -39,7 +39,7 @@ export function PortfolioContent({ projects }: PortfolioContentProps) {
           />
         ))}
       </div>
-      {filtered.length === 0 && <p className="mt-10 text-center text-charcoal">No projects found.</p>}
+      {filtered.length === 0 && <p className="mt-10 text-center text-foreground">No projects found.</p>}
     </>
   );
 }

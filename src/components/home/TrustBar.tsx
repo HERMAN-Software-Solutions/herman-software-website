@@ -14,7 +14,7 @@ export function TrustBar() {
   }, []);
 
   return (
-    <section className="border-b border-gray-light bg-gray-light py-8 dark:bg-navy dark:border-navy-light">
+    <section className="border-b border-gray-light bg-surface-alt py-8 dark:bg-navy-dark dark:border-navy-light">
       <div className="container-site">
         <p className="mb-6 text-center text-body-sm font-medium uppercase tracking-wider text-gray-medium">
           Trusted technology partner for startups, SMEs, and enterprises across East Africa
@@ -24,7 +24,7 @@ export function TrustBar() {
         <div className="mb-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-2xl font-bold text-navy dark:text-white">
+              <div className="text-2xl font-bold text-heading dark:text-white">
                 <CountUp end={parseInt(stat.value) || 0} suffix={stat.suffix || ""} />
               </div>
               <div className="text-body-sm text-gray-medium">{stat.label}</div>
@@ -37,7 +37,7 @@ export function TrustBar() {
           {technologies.map((tech) => (
             <span
               key={tech.name}
-              className="rounded-full border border-gray-medium/30 bg-white px-4 py-1.5 text-xs font-medium text-gray-medium dark:bg-navy-light dark:border-navy dark:text-gray-medium"
+              className="rounded-full border border-gray-medium/30 bg-surface px-4 py-1.5 text-xs font-medium text-gray-medium dark:bg-navy-light dark:border-navy dark:text-gray-medium"
             >
               {tech.name}
             </span>

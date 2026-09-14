@@ -11,11 +11,11 @@ export function ProductShowcase() {
   }, []);
 
   return (
-    <section className="section-padding bg-gray-light dark:bg-navy">
+    <section className="section-padding bg-surface-alt dark:bg-navy-dark">
       <div className="container-site">
         <div className="text-center mb-10">
           <h2 className="mb-3">Try Our Products</h2>
-          <p className="mx-auto max-w-2xl text-body-lg text-charcoal dark:text-gray-light">
+          <p className="mx-auto max-w-2xl text-body-lg text-foreground dark:text-foreground">
             Explore the tools we've built to help millions of users.
           </p>
         </div>
@@ -43,13 +43,13 @@ export function ProductShowcase() {
                   )}
                 </div>
               </div>
-              <p className="text-body-sm text-charcoal dark:text-gray-light mb-4">
+              <p className="text-body-sm text-foreground dark:text-foreground mb-4">
                 {product.description}
               </p>
               {product.platforms && product.platforms.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
                   {product.platforms.map((tag: string) => (
-                    <span key={tag} className="text-xs text-gray-medium bg-gray-light dark:bg-navy-dark px-2 py-1 rounded-md">
+                    <span key={tag} className="text-xs text-gray-medium bg-surface-alt dark:bg-navy-dark px-2 py-1 rounded-md">
                       {tag}
                     </span>
                   ))}
@@ -65,13 +65,13 @@ export function ProductShowcase() {
 
           {/* Future Product Placeholder */}
           <div className="card-base p-6 border-dashed border-2 border-gray-light dark:border-navy-light flex flex-col items-center justify-center text-center min-h-[280px]">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy/5 text-navy dark:text-white mb-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy/5 text-heading dark:text-white mb-4">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
               </svg>
             </div>
             <h3 className="text-h4 mb-2">Coming Soon</h3>
-            <p className="text-body-sm text-charcoal dark:text-gray-light">
+            <p className="text-body-sm text-foreground dark:text-foreground">
               We're building more tools. Have an idea? Let us know.
             </p>
             <a href="/contact" className="mt-4 text-body-sm font-medium text-teal hover:underline">
