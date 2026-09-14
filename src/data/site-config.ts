@@ -20,7 +20,7 @@ export const siteConfig = {
   social: {
     linkedin: "https://www.linkedin.com/in/jaing-salim-2641a6280?trk=contact-info",
     twitter: "https://x.com/JiangSalim1",
-    facebook: "https://www.facebook.com/jiangsalim1",
+    facebook: "https://www.facebook.com/HermanSoftwareSolutions",
   },
 
   analytics: {
