@@ -11,6 +11,7 @@ import { PageTransition } from "@/components/shared/PageTransition";
 import { generateLocalBusinessSchema } from "@/lib/seo";
 import { CookieBanner } from "@/components/shared/CookieBanner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { generateOrganizationSchema, generateSoftwareAppSchema } from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
@@ -258,6 +259,7 @@ export default function RootLayout({
 
         <CookieBanner />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
