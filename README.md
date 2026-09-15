@@ -1,6 +1,3 @@
-herman-software-website/README.md
-
-```markdown
 # HERMAN Software Solutions — Website
 
 [![Deploy on Vercel](https://img.shields.io/badge/deploy-vercel-black?logo=vercel)](https://herman-software-website.vercel.app)
