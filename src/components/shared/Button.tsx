@@ -24,7 +24,7 @@ export function Button({
 
   const variants: Record<ButtonVariant, string> = {
     primary: "bg-teal text-white hover:bg-teal-dark shadow-button",
-    secondary: "border-2 border-navy text-navy hover:bg-navy hover:text-white",
+    secondary: "border-2 border-heading text-heading hover:bg-heading hover:text-surface",
     ghost: "text-teal hover:underline",
   };
 

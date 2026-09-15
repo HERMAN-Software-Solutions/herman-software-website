@@ -12,6 +12,7 @@ import { generateLocalBusinessSchema } from "@/lib/seo";
 import { CookieBanner } from "@/components/shared/CookieBanner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { generateOrganizationSchema, generateSoftwareAppSchema } from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -27,8 +28,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.shortName}`,
+    default: `${siteConfig.name} - ${siteConfig.tagline}`,
+    template: `%s - ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
   keywords: [
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     locale: "en_UG",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [
       {
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
@@ -80,7 +81,7 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
   },
-    icons: {
+  icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
@@ -99,57 +100,105 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(localBusinessSchema),
           }}
         />
+
+        {/* Theme initialization — runs before paint to prevent flash */}
         <script
+          id="theme-init"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                var theme = localStorage.getItem('theme');
-                if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                }
-              })();
-            `,
-          }}
-        />
-        {/* Google Analytics — Consent-based */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var consent = localStorage.getItem('cookie-consent');
-                if (consent === 'accepted') {
-                  var gaId = '${process.env.NEXT_PUBLIC_GA_ID || ""}';
-                  if (gaId) {
-                    var script = document.createElement('script');
-                    script.async = true;
-                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
-                    document.head.appendChild(script);
-                    
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', gaId);
+                try {
+                  var stored = localStorage.getItem('theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  var shouldBeDark = stored === 'dark' || (stored !== 'light' && prefersDark);
+                  if (shouldBeDark) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
                   }
                 }
               })();
             `,
           }}
         />
+
+        {/* Google Analytics — consent-based */}
+        <script
+          id="ga-init"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var GA_ID = '${process.env.NEXT_PUBLIC_GA_ID || ""}';
+                if (!GA_ID) return;
+
+                function initGA() {
+                  if (window.__ga_initialized) return;
+                  window.__ga_initialized = true;
+
+                  var script = document.createElement('script');
+                  script.async = true;
+                  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                  document.head.appendChild(script);
+
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){window.dataLayer.push(arguments);}
+                  window.gtag = gtag;
+
+                  gtag('js', new Date());
+                  gtag('config', GA_ID, { anonymize_ip: true });
+                }
+
+                try {
+                  if (localStorage.getItem('cookie-consent') === 'accepted') {
+                    initGA();
+                  }
+
+                  window.addEventListener('cookie-consent-changed', function(e) {
+                    if (e.detail === 'accepted') {
+                      initGA();
+                    }
+                  });
+                } catch (err) {
+                  // localStorage disabled — GA stays off until user consents via UI
+                }
+              })();
+            `,
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateOrganizationSchema()),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateSoftwareAppSchema()),
+          }}
+        />
       </head>
-      <body className="flex min-h-screen flex-col bg-white text-charcoal dark:bg-navy-dark dark:text-gray-light transition-colors">
+      <body className="flex min-h-screen flex-col bg-surface text-foreground dark:bg-navy-dark dark:text-foreground transition-colors">
         <SkipLink />
         <Header />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1" tabIndex={-1}>
           <PageTransition>
             {children}
           </PageTransition>
@@ -158,54 +207,56 @@ export default function RootLayout({
         <WhatsAppButton />
         <BackToTop />
 
-        {/* Tawk.to Live Chat — Enhanced */}
-<script
-  type="text/javascript"
-  dangerouslySetInnerHTML={{
-    __html: `
-      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-      
-      Tawk_API.onLoad = function(){
-        // Suppress performance logging CORS errors
-        Tawk_API.logPerformance = function(){};
-        
-        var visitorId = localStorage.getItem('tawk_visitor');
-        if (visitorId) {
-          Tawk_API.setAttributes({ id: visitorId }, function(){});
-        } else {
-          var newId = 'v_' + Date.now();
-          localStorage.setItem('tawk_visitor', newId);
-          Tawk_API.setAttributes({ id: newId }, function(){});
-        }
-        
-        // Proactive chat after 45 seconds on pricing/quote pages
-        var proactivePages = ['/get-quote', '/pricing', '/services', '/contact'];
-        var currentPath = window.location.pathname;
-        if (proactivePages.some(function(p) { return currentPath.startsWith(p); })) {
-          setTimeout(function() {
-            Tawk_API.maximize();
-          }, 45000);
-        }
-      };
-      
-      // Track page views for analytics
-      Tawk_API.onChatStarted = function(){
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'chat_started', { event_category: 'engagement' });
-        }
-      };
-      
-      (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/6a031e36b31dab1c398e1064/1joe2s2dm';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
-      })();
-    `,
-  }}
-/>
+        <script
+          id="tawk-init"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.addEventListener('load', function() {
+                setTimeout(function() {
+                  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+
+                  Tawk_API.onLoad = function(){
+                    Tawk_API.logPerformance = function(){};
+
+                    var visitorId = localStorage.getItem('tawk_visitor');
+                    if (visitorId) {
+                      Tawk_API.setAttributes({ id: visitorId }, function(){});
+                    } else {
+                      var newId = 'v_' + Date.now();
+                      localStorage.setItem('tawk_visitor', newId);
+                      Tawk_API.setAttributes({ id: newId }, function(){});
+                    }
+
+                    var proactivePages = ['/get-quote', '/pricing', '/services', '/contact'];
+                    var currentPath = window.location.pathname;
+                    if (proactivePages.some(function(p) { return currentPath.startsWith(p); })) {
+                      setTimeout(function() {
+                        Tawk_API.maximize();
+                      }, 45000);
+                    }
+                  };
+
+                  Tawk_API.onChatStarted = function(){
+                    if (typeof gtag !== 'undefined') {
+                      gtag('event', 'chat_started', { event_category: 'engagement' });
+                    }
+                  };
+
+                  (function(){
+                    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                    s1.async=true;
+                    s1.src='https://embed.tawk.to/6a031e36b31dab1c398e1064/1joe2s2dm';
+                    s1.charset='UTF-8';
+                    s1.setAttribute('crossorigin','*');
+                    s0.parentNode.insertBefore(s1,s0);
+                  })();
+                }, 3000);
+              });
+            `,
+          }}
+        />
+
         <CookieBanner />
         <SpeedInsights />
         <Analytics />

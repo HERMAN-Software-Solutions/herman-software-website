@@ -40,7 +40,7 @@ export function TableOfContents() {
 
   return (
     <nav className="rounded-card border border-gray-light p-4 dark:border-navy-light">
-      <h4 className="mb-3 text-body-sm font-semibold uppercase tracking-wider text-charcoal dark:text-white">
+      <h4 className="mb-3 text-body-sm font-semibold uppercase tracking-wider text-foreground dark:text-white">
         On This Page
       </h4>
       <ul className="space-y-1">

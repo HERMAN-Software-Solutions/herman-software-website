@@ -80,7 +80,7 @@ export function QuoteForm() {
           </svg>
         </div>
         <h3 className="mb-2">Quote Request Submitted!</h3>
-        <p className="text-charcoal">
+        <p className="text-foreground">
           We&apos;ll review your requirements and get back to you within 1–2 business days.
         </p>
       </div>
@@ -102,7 +102,7 @@ export function QuoteForm() {
             <div key={label} className="flex items-center">
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
-                  i <= step ? "bg-teal text-white" : "bg-gray-light text-gray-medium"
+                  i <= step ? "bg-teal text-white" : "bg-surface-alt text-gray-medium"
                 }`}
               >
                 {i + 1}
@@ -117,7 +117,7 @@ export function QuoteForm() {
               {i < STEPS.length - 1 && (
                 <div
                   className={`mx-4 hidden h-0.5 w-16 sm:block ${
-                    i < step ? "bg-teal" : "bg-gray-light"
+                    i < step ? "bg-teal" : "bg-surface-alt"
                   }`}
                 />
               )}
@@ -141,7 +141,7 @@ export function QuoteForm() {
       {step === 1 && (
         <div className="space-y-5">
           <h3 className="text-h3">What Type of Service Do You Need?</h3>
-          <p className="text-body-sm text-charcoal">Select all that apply.</p>
+          <p className="text-body-sm text-foreground">Select all that apply.</p>
           {[
             "Custom Software Development",
             "Web Application",
@@ -167,7 +167,7 @@ export function QuoteForm() {
                 }}
                 className="h-4 w-4 rounded border-gray-medium text-teal focus:ring-teal"
               />
-              <span className="text-body font-medium text-navy">{type}</span>
+              <span className="text-body font-medium text-heading">{type}</span>
             </label>
           ))}
         </div>

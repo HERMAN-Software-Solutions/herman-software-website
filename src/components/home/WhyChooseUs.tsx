@@ -43,7 +43,7 @@ export function WhyChooseUs() {
   }, []);
 
   return (
-    <section className="section-padding bg-gray-light">
+    <section className="section-padding bg-surface-alt">
       <div className="container-site">
         <SectionHeading
           title="Why Clients Choose Us"
@@ -55,12 +55,12 @@ export function WhyChooseUs() {
               key={item.title}
               className="card-base flex gap-5 p-6 transition-all duration-300 hover:shadow-cardHover"
             >
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md bg-navy/5 text-navy">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-md bg-navy/5 text-heading">
                 {defaultIcons[i] || defaultIcons[0]}
               </div>
               <div>
                 <h3 className="mb-2 text-h4">{item.title}</h3>
-                <p className="text-body-sm text-charcoal">{item.description}</p>
+                <p className="text-body-sm text-foreground">{item.description}</p>
               </div>
             </div>
           ))}

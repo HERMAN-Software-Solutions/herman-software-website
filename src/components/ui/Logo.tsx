@@ -13,7 +13,7 @@ export function Logo({ variant = "full", className = "" }: LogoProps) {
         className={`flex items-center gap-2 ${className}`}
         aria-label={siteConfig.name}
       >
-        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-navy text-lg font-bold text-white">
+        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-navy-dark text-lg font-bold text-white">
           HS
         </div>
       </a>
@@ -39,7 +39,7 @@ export function Logo({ variant = "full", className = "" }: LogoProps) {
             stroke="currentColor"
             strokeWidth="2"
             fill="none"
-            className="text-navy"
+            className="text-heading"
           />
           <line
             x1="14"
@@ -49,7 +49,7 @@ export function Logo({ variant = "full", className = "" }: LogoProps) {
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
-            className="text-navy"
+            className="text-heading"
           />
           <line
             x1="26"
@@ -59,7 +59,7 @@ export function Logo({ variant = "full", className = "" }: LogoProps) {
             stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
-            className="text-navy"
+            className="text-heading"
           />
           <line
             x1="14"
@@ -73,10 +73,10 @@ export function Logo({ variant = "full", className = "" }: LogoProps) {
         </svg>
       </div>
       <div className="hidden sm:block">
-        <div className="text-lg font-bold leading-tight tracking-tight text-navy">
+        <div className="text-lg font-bold leading-tight tracking-tight text-heading">
           HERMAN
         </div>
-        <div className="text-[10px] font-light uppercase tracking-[3px] text-charcoal">
+        <div className="text-[10px] font-light uppercase tracking-[3px] text-foreground">
           Software Solutions
         </div>
       </div>

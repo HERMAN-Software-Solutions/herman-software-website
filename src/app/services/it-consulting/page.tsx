@@ -3,7 +3,7 @@ import { Button } from "@/components/shared/Button";
 export default function ITConsultingPage() {
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">IT Strategy & Consulting</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -12,10 +12,10 @@ export default function ITConsultingPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-3xl">
           <h2 className="mb-6">Pragmatic Advice, Never Over-Engineered</h2>
-          <p className="mb-4 text-body text-charcoal">
+          <p className="mb-4 text-body text-foreground">
             Not sure what technology you need? Planning a digital transformation or cloud migration?
             We provide independent assessments and actionable recommendations — always in plain
             language your stakeholders can understand.
@@ -36,7 +36,7 @@ export default function ITConsultingPage() {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <span className="text-body-sm font-medium text-navy">{item}</span>
+                <span className="text-body-sm font-medium text-heading">{item}</span>
               </div>
             ))}
           </div>

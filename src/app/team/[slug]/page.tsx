@@ -24,9 +24,9 @@ export default function TeamMemberPage() {
 
   if (loading) {
     return (
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site text-center">
-          <p className="text-body-lg text-charcoal">Loading...</p>
+          <p className="text-body-lg text-foreground">Loading...</p>
         </div>
       </section>
     );
@@ -34,10 +34,10 @@ export default function TeamMemberPage() {
 
   if (!member) {
     return (
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site text-center">
           <h1 className="mb-4">Team Member Not Found</h1>
-          <p className="text-body text-charcoal">The team member you're looking for doesn't exist.</p>
+          <p className="text-body text-foreground">The team member you're looking for doesn't exist.</p>
           <Button href="/about" variant="primary" className="mt-6">Back to About</Button>
         </div>
       </section>
@@ -47,14 +47,14 @@ export default function TeamMemberPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy py-16 md:py-20">
+      <section className="bg-navy-dark py-16 md:py-20">
         <div className="container-site">
           <div className="flex flex-col items-center gap-8 md:flex-row md:items-start">
-            <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full bg-white md:h-40 md:w-40">
+            <div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-full bg-surface md:h-40 md:w-40">
               {member.image ? (
                 <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-4xl font-bold text-navy">
+                <div className="flex h-full w-full items-center justify-center text-4xl font-bold text-heading">
                   {member.name.split(" ").map((n: string) => n[0]).join("").toUpperCase()}
                 </div>
               )}
@@ -64,17 +64,17 @@ export default function TeamMemberPage() {
               <p className="mt-2 text-body-lg text-teal">{member.role}</p>
               <div className="mt-4 flex flex-wrap justify-center gap-3 md:justify-start">
                 {member.linkedin && (
-                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-white hover:text-navy transition-colors">
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-surface hover:text-heading transition-colors">
                     LinkedIn
                   </a>
                 )}
                 {member.github && (
-                  <a href={member.github} target="_blank" rel="noopener noreferrer" className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-white hover:text-navy transition-colors">
+                  <a href={member.github} target="_blank" rel="noopener noreferrer" className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-surface hover:text-heading transition-colors">
                     GitHub
                   </a>
                 )}
                 {member.email && (
-                  <a href={`mailto:${member.email}`} className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-white hover:text-navy transition-colors">
+                  <a href={`mailto:${member.email}`} className="rounded-md border border-gray-medium px-4 py-2 text-body-sm text-gray-medium hover:bg-surface hover:text-heading transition-colors">
                     Email
                   </a>
                 )}
@@ -85,16 +85,16 @@ export default function TeamMemberPage() {
       </section>
 
       {/* Bio */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <div className="mx-auto max-w-3xl">
             <SectionHeading title="About" />
             {member.fullBio ? (
-              <div className="prose prose-lg max-w-none text-charcoal">
+              <div className="prose prose-lg max-w-none text-foreground">
                 <PortableText value={member.fullBio} />
               </div>
             ) : (
-              <p className="text-body text-charcoal">{member.bio}</p>
+              <p className="text-body text-foreground">{member.bio}</p>
             )}
           </div>
         </div>
@@ -102,12 +102,12 @@ export default function TeamMemberPage() {
 
       {/* Skills */}
       {member.skills && member.skills.length > 0 && (
-        <section className="section-padding bg-gray-light">
+        <section className="section-padding bg-surface-alt">
           <div className="container-site">
             <SectionHeading title="Skills & Expertise" />
             <div className="flex flex-wrap justify-center gap-3">
               {member.skills.map((skill: string) => (
-                <span key={skill} className="rounded-full bg-navy px-4 py-2 text-body-sm font-medium text-white">
+                <span key={skill} className="rounded-full bg-navy-dark px-4 py-2 text-body-sm font-medium text-white">
                   {skill}
                 </span>
               ))}
@@ -118,7 +118,7 @@ export default function TeamMemberPage() {
 
       {/* Projects */}
       {member.projects && member.projects.length > 0 && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site">
             <SectionHeading
               title="Projects Worked On"
@@ -141,7 +141,7 @@ export default function TeamMemberPage() {
       )}
 
       {/* CTA */}
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h2 className="text-white">Want to Work With Our Team?</h2>
           <p className="mx-auto mt-4 max-w-xl text-body-lg text-gray-medium">

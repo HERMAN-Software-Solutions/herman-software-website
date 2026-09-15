@@ -109,7 +109,7 @@ export function Footer() {
               Contact Us
             </h4>
             <ul className="space-y-2 text-body-sm text-gray-medium">
-              <li>{settings?.address || "Haji Tarmchi, Jinja, Uganda"}</li>
+              <li>{settings?.address || "Gabula Rd, Jinja, Uganda"}</li>
               <li>
                 <a href={`mailto:${settings?.email || "infohermansoftware@gmail.com"}`} className="hover:text-teal transition-colors">
                   {settings?.email || "infohermansoftware@gmail.com"}
@@ -131,7 +131,7 @@ export function Footer() {
             </h4>
             <div className="flex gap-3">
               {settings?.linkedin && (
-                <a href={settings.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="rounded-md p-2 text-gray-medium hover:bg-navy hover:text-teal transition-colors">
+                <a href={settings.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="rounded-md p-2 text-gray-medium hover:bg-navy-dark hover:text-teal transition-colors">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                     <rect width="4" height="12" x="2" y="9" />
@@ -140,14 +140,14 @@ export function Footer() {
                 </a>
               )}
               {settings?.twitter && (
-                <a href={settings.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="rounded-md p-2 text-gray-medium hover:bg-navy hover:text-teal transition-colors">
+                <a href={settings.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="rounded-md p-2 text-gray-medium hover:bg-navy-dark hover:text-teal transition-colors">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
                   </svg>
                 </a>
               )}
               {settings?.facebook && (
-                <a href={settings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-md p-2 text-gray-medium hover:bg-navy hover:text-teal transition-colors">
+                <a href={settings.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-md p-2 text-gray-medium hover:bg-navy-dark hover:text-teal transition-colors">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>

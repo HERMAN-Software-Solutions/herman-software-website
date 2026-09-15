@@ -50,14 +50,14 @@ export function SocialShare({ title, url }: SocialShareProps) {
 
   return (
     <div className="flex items-center gap-1">
-      <span className="mr-2 text-body-sm font-medium text-charcoal dark:text-gray-medium">Share:</span>
+      <span className="mr-2 text-body-sm font-medium text-foreground dark:text-gray-medium">Share:</span>
       {links.map((link) => (
         <a
           key={link.name}
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-md p-2 text-gray-medium hover:bg-gray-light hover:text-teal dark:hover:bg-navy-light transition-colors"
+          className="rounded-md p-2 text-gray-medium hover:bg-surface-alt hover:text-teal dark:hover:bg-navy-light transition-colors"
           aria-label={`Share on ${link.name}`}
         >
           {link.icon}

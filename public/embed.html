@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>MediaVault Embed Relay</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* Floating action bar — mid-right, vertical stack */
+    #actions {
+      position: absolute;
+      top: 50%;
+      right: 6px;
+      transform: translateY(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    body:hover #actions,
+    body.popout #actions,
+    #actions.pinned { opacity: 1; }
+
+    /* Buttons */
+    .btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      backdrop-filter: blur(4px);
+      line-height: 1;
+    }
+    .btn:hover {
+      background: rgba(0, 194, 186, 0.9);
+      border-color: #00C2BA;
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Popout mode styling */
+    body.popout #actions {
+      opacity: 1;
+    }
+    body.popout .btn-close {
+      background: rgba(220, 60, 60, 0.85);
+      border-color: rgba(220, 60, 60, 0.9);
+    }
+    body.popout .btn-close:hover {
+      background: rgba(240, 70, 70, 1);
+    }
+
+    /* Subscribe bar */
+    #subbar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+      backdrop-filter: blur(6px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      z-index: 9;
+    }
+    .sub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #ff0000;
+      color: #fff;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.15s ease, transform 0.1s ease;
+      box-shadow: 0 2px 8px rgba(255, 0, 0, 0.25);
+    }
+    .sub-btn:hover {
+      background: #cc0000;
+    }
+    .sub-btn:active {
+      transform: translateY(1px);
+    }
+    .sub-icon {
+      flex-shrink: 0;
+    }
+    #subbar .g-ytsubscribe {
+      transform: scale(0.95);
+      transform-origin: center;
+    }
+    /* Hide the subscribe bar in popout mode */
+    body.popout #subbar {
+      display: none;
+    }
+
+    /* Error state */
+    .error {
+      color: #8B9DB5;
+      text-align: center;
+      padding-top: 40vh;
+      font-size: 14px;
+    }
+
+    /* Small padding adjustment when in popout for the top bar */
+    body.popout iframe {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <div id="subbar">
+    <a
+      href="https://www.youtube.com/@HermanSoftwareSolutions?sub_confirmation=1"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="sub-btn"
+    >
+      <svg class="sub-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      <span>Subscribe</span>
+    </a>
+  </div>
+
+  <div id="actions">
+    <button class="btn btn-popout" id="popoutBtn" style="display: none;">⧉</button>
+    <button class="btn btn-return" id="returnBtn" style="display: none;">↩</button>
+    <button class="btn btn-close" id="closeBtn" style="display: none;">✕</button>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('v');
+      var isPopout = params.get('popout') === '1';
+      var autoplay = isPopout ? '1' : (params.get('autoplay') || '1');
+      var mute = params.get('mute') || '1';
+
+      if (!id || !/^[A-Za-z0-9_-]{6,}$/.test(id)) {
+        document.getElementById('root').innerHTML =
+          '<div class="error">No valid video ID provided.</div>';
+        return;
+      }
+
+      // Build the YouTube embed URL — enablejsapi is required for postMessage
+      var embedParams = new URLSearchParams({
+        autoplay: autoplay,
+        mute: mute,
+        rel: '0',
+        modestbranding: '1',
+        playsinline: '1',
+        enablejsapi: '1',
+        origin: window.location.origin,
+      });
+      var src = 'https://www.youtube-nocookie.com/embed/' +
+        encodeURIComponent(id) + '?' + embedParams.toString();
+
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.setAttribute('allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      document.getElementById('root').appendChild(iframe);
+
+      // ── Auto-unmute on first user interaction ──
+      // Chromium blocks audio until the user has interacted with the page.
+      // The video autoplays muted; the FIRST click anywhere on the relay
+      // sends an unMute command via the YouTube iframe API.
+      var didUnmute = false;
+
+      function unmuteOnce() {
+        if (didUnmute) return;
+        didUnmute = true;
+        try {
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
+            '*'
+          );
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }),
+            '*'
+          );
+        } catch (e) {
+          /* ignore cross-origin or timing errors */
+        }
+        // Clean up — one click is enough
+        document.removeEventListener('click', unmuteOnce, true);
+        document.removeEventListener('touchstart', unmuteOnce, true);
+        document.removeEventListener('keydown', unmuteOnce, true);
+      }
+
+      document.addEventListener('click', unmuteOnce, true);
+      document.addEventListener('touchstart', unmuteOnce, true);
+      document.addEventListener('keydown', unmuteOnce, true);
+
+      // ── Forward commands from the parent (MediaVault) to the inner YouTube iframe ──
+      // The parent sends { event: 'command', func: 'unMute', args: [] }, which the
+      // YouTube player understands — but it must be re-posted to the *inner* iframe.
+      window.addEventListener('message', function (e) {
+        try {
+          // Only forward if it's actually a YouTube-API-shaped command
+          var data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+          if (data && data.event === 'command') {
+            iframe.contentWindow.postMessage(
+              JSON.stringify(data),
+              '*'
+            );
+          }
+        } catch (err) {
+          /* ignore parse errors */
+        }
+      });
+      document.addEventListener('touchstart', unmuteOnce, true);
+      document.addEventListener('keydown', unmuteOnce, true);
+
+      // ── Popout mode ──
+      if (isPopout) {
+        document.body.classList.add('popout');
+        // Buttons stay hidden in popout mode — the OS window title bar
+        // provides its own close button. Cleaner, no overlap with controls.
+        return;
+      }
+
+      // ── Normal (embedded) mode ──
+      var popoutBtn = document.getElementById('popoutBtn');
+      popoutBtn.style.display = 'block';
+
+      popoutBtn.addEventListener('click', function () {
+        var url = window.location.origin + window.location.pathname +
+          '?v=' + encodeURIComponent(id) + '&popout=1';
+
+        var w = window.open(
+          url,
+          'mediavault-miniplayer',
+          'width=480,height=310,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=no'
+        );
+
+        if (w) w.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -75,10 +75,10 @@ export function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProp
  if (status === "success") {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="bg-white rounded-card p-8 max-w-md w-full text-center">
+      <div className="bg-surface rounded-card p-8 max-w-md w-full text-center">
         <div className="text-4xl mb-4">✅</div>
         <h3 className="mb-2">Application Submitted!</h3>
-        <p className="text-body-sm text-charcoal mb-6">{message}</p>
+        <p className="text-body-sm text-foreground mb-6">{message}</p>
         <div className="flex flex-col gap-3">
           <button onClick={onClose} className="rounded-md bg-teal px-6 py-2 text-white hover:bg-teal-dark transition-colors">
             Close
@@ -104,10 +104,10 @@ export function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProp
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-card p-6 md:p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-surface rounded-card p-6 md:p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-h4">Apply for {jobTitle}</h3>
-          <button onClick={onClose} className="p-1 hover:bg-gray-light rounded-md transition-colors">
+          <button onClick={onClose} className="p-1 hover:bg-surface-alt rounded-md transition-colors">
             <X size={20} />
           </button>
         </div>

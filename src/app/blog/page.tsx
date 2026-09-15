@@ -56,7 +56,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">Technical Insights & Practical Guides</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -64,7 +64,7 @@ export default function BlogPage() {
           </p>
         </div>
       </section>
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           {/* Search Bar */}
           <div className="mb-8">

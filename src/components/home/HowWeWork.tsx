@@ -12,7 +12,7 @@ export function HowWeWork() {
   }, []);
 
   return (
-    <section className="section-padding bg-gray-light">
+    <section className="section-padding bg-surface-alt">
       <div className="container-site">
         <SectionHeading
           title="How We Work"
@@ -25,11 +25,11 @@ export function HowWeWork() {
           <div className="grid grid-cols-4 gap-8">
             {steps.map((step) => (
               <div key={step.stepNumber} className="relative text-center">
-                <div className="relative z-10 mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-navy text-lg font-bold text-white">
+                <div className="relative z-10 mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-navy-dark text-lg font-bold text-white">
                   {String(step.stepNumber).padStart(2, "0")}
                 </div>
                 <h4 className="mb-2">{step.title}</h4>
-                <p className="text-body-sm text-charcoal">{step.description}</p>
+                <p className="text-body-sm text-foreground">{step.description}</p>
               </div>
             ))}
           </div>
@@ -39,12 +39,12 @@ export function HowWeWork() {
         <div className="space-y-8 lg:hidden">
           {steps.map((step) => (
             <div key={step.stepNumber} className="flex gap-4">
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-navy-dark text-sm font-bold text-white">
                 {String(step.stepNumber).padStart(2, "0")}
               </div>
               <div>
                 <h4 className="mb-1">{step.title}</h4>
-                <p className="text-body-sm text-charcoal">{step.description}</p>
+                <p className="text-body-sm text-foreground">{step.description}</p>
               </div>
             </div>
           ))}

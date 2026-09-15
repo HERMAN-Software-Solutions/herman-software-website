@@ -3,7 +3,7 @@ import { Button } from "@/components/shared/Button";
 export default function CustomSoftwarePage() {
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">Custom Software Engineering</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -12,16 +12,16 @@ export default function CustomSoftwarePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-3xl">
           <h2 className="mb-6">Systems That Fit Your Operations</h2>
-          <p className="mb-4 text-body text-charcoal">
+          <p className="mb-4 text-body text-foreground">
             Off-the-shelf software forces you to change how you work. We build systems that adapt to
             you — whether it&apos;s inventory management, logistics tracking, HR platforms, or bespoke
             internal tools. Every solution is designed around your unique workflows, not the other
             way around.
           </p>
-          <p className="mb-4 text-body text-charcoal">
+          <p className="mb-4 text-body text-foreground">
             We&apos;ve built custom ERPs for agricultural cooperatives, inventory systems for retail
             chains, fleet management platforms for logistics companies, and membership portals for
             professional associations. If your operations have a unique shape, we build software
@@ -45,8 +45,8 @@ export default function CustomSoftwarePage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-semibold text-navy">{item.step}</p>
-                  <p className="text-body-sm text-charcoal">{item.desc}</p>
+                  <p className="font-semibold text-heading">{item.step}</p>
+                  <p className="text-body-sm text-foreground">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -55,7 +55,7 @@ export default function CustomSoftwarePage() {
           <h3 className="mb-4">Typical Technology Stack</h3>
           <div className="mb-8 flex flex-wrap gap-2">
             {["Python", "Django", "Node.js", "Laravel", "PostgreSQL", "React", "Docker", "AWS"].map((tech) => (
-              <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-navy">
+              <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-heading">
                 {tech}
               </span>
             ))}

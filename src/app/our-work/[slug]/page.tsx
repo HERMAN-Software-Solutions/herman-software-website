@@ -31,13 +31,13 @@ export default function ProjectDetailPage() {
   if (loading) {
     return (
       <>
-        <section className="bg-navy py-20">
+        <section className="bg-navy-dark py-20">
           <div className="container-site">
             <Skeleton className="h-10 w-2/3 mb-4" />
             <Skeleton className="h-6 w-1/3" />
           </div>
         </section>
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-surface">
           <div className="container-site mx-auto max-w-3xl space-y-4">
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-full" />
@@ -50,10 +50,10 @@ export default function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <section className="section-padding bg-white text-center">
+      <section className="section-padding bg-surface text-center">
         <div className="container-site">
           <h1 className="mb-4">Project Not Found</h1>
-          <p className="text-charcoal mb-6">The project you're looking for doesn't exist.</p>
+          <p className="text-foreground mb-6">The project you're looking for doesn't exist.</p>
           <Button href="/our-work" variant="primary">View All Projects</Button>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default function ProjectDetailPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-navy py-16 md:py-20">
+      <section className="bg-navy-dark py-16 md:py-20">
         <div className="container-site">
           <Breadcrumbs
             items={[
@@ -115,7 +115,7 @@ export default function ProjectDetailPage() {
       </section>
 
       {/* Content */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-3xl">
           <div className="mb-8">
             <SocialShare
@@ -126,22 +126,22 @@ export default function ProjectDetailPage() {
 
           <div className="mb-10">
             <h3 className="mb-3 text-teal">The Challenge</h3>
-            <p className="text-body text-charcoal">{project.challenge}</p>
+            <p className="text-body text-foreground">{project.challenge}</p>
           </div>
 
           <div className="mb-10">
             <h3 className="mb-3 text-teal">Our Solution</h3>
-            <p className="text-body text-charcoal">{project.solution}</p>
+            <p className="text-body text-foreground">{project.solution}</p>
           </div>
 
           <div className="mb-10">
             <h3 className="mb-3 text-teal">The Result</h3>
-            <p className="text-body text-charcoal">{project.result}</p>
+            <p className="text-body text-foreground">{project.result}</p>
           </div>
 
-          <div className="rounded-card bg-gray-light p-8 text-center dark:bg-navy">
+          <div className="rounded-card bg-surface-alt p-8 text-center dark:bg-navy-dark">
             <h3 className="mb-2">Have a Similar Project?</h3>
-            <p className="mb-4 text-charcoal dark:text-gray-medium">Let's discuss how we can help your business.</p>
+            <p className="mb-4 text-foreground dark:text-gray-medium">Let's discuss how we can help your business.</p>
             <Button href="/get-quote" variant="primary">Get a Quote</Button>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function ProjectDetailPage() {
 
       {/* Related Projects */}
       {relatedProjects.length > 0 && (
-        <section className="section-padding bg-gray-light">
+        <section className="section-padding bg-surface-alt">
           <div className="container-site">
             <h2 className="mb-8 text-center">Related Projects</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -168,7 +168,7 @@ export default function ProjectDetailPage() {
         </section>
       )}
 
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h2 className="text-white">Ready to Start Your Project?</h2>
           <p className="mx-auto mt-4 max-w-xl text-body-lg text-gray-medium">

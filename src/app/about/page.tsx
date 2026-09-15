@@ -19,7 +19,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Banner */}
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">We Are HERMAN Software Solutions</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -29,14 +29,14 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <div className="mx-auto max-w-3xl">
             <SectionHeading
               title="Our Story"
               subtitle="Founded on a simple belief: businesses in Uganda and across East Africa deserve the same quality of technology as anywhere else in the world."
             />
-            <div className="space-y-4 text-body text-charcoal">
+            <div className="space-y-4 text-body text-foreground">
               <p>
                 HERMAN Software Solutions Limited was founded on a simple belief: that businesses in
                 Uganda and across East Africa deserve the same quality of technology as anywhere else
@@ -49,7 +49,7 @@ export default function AboutPage() {
                 operations, design clean architectures, and stay with you long after deployment.
               </p>
               <p>
-                We are proudly based at Haji Tarmchi, Jinja — and from here, we serve clients locally,
+                We are proudly based at Gabula Rd, Jinja — and from here, we serve clients locally,
                 regionally, and internationally.
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
 
       {/* Stats */}
       {stats.length > 0 && (
-        <section className="bg-navy py-12">
+        <section className="bg-navy-dark py-12">
           <div className="container-site">
             <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
               {stats.map((stat) => (
@@ -76,7 +76,7 @@ export default function AboutPage() {
       )}
 
       {/* Mission & Vision */}
-      <section className="section-padding bg-gray-light">
+      <section className="section-padding bg-surface-alt">
         <div className="container-site">
           <div className="grid gap-8 sm:grid-cols-2">
             <div className="card-base p-8 text-center">
@@ -87,13 +87,13 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h2 className="mb-3">Our Mission</h2>
-              <p className="text-body text-charcoal">
+              <p className="text-body text-foreground">
                 To deliver robust, scalable, and maintainable software that solves real operational
                 problems — on time, on budget, and with complete transparency.
               </p>
             </div>
             <div className="card-base p-8 text-center">
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-navy/10 text-navy mx-auto">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-navy/10 text-heading mx-auto">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2L2 7l10 5 10-5-10-5z" />
                   <path d="M2 17l10 5 10-5" />
@@ -101,7 +101,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h2 className="mb-3">Our Vision</h2>
-              <p className="text-body text-charcoal">
+              <p className="text-body text-foreground">
                 To be East Africa&apos;s most trusted software engineering firm — known for technical
                 excellence, honest partnerships, and measurable client results.
               </p>
@@ -111,7 +111,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <SectionHeading
             title="Our Values"
@@ -149,7 +149,7 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h4 className="mb-1">{value.title}</h4>
-                  <p className="text-body-sm text-charcoal">{value.description}</p>
+                  <p className="text-body-sm text-foreground">{value.description}</p>
                 </div>
               </div>
             ))}
@@ -158,7 +158,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="section-padding bg-gray-light">
+      <section className="section-padding bg-surface-alt">
         <div className="container-site">
           <SectionHeading
             title="The People Behind the Code"
@@ -180,7 +180,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h2 className="text-white">Want to Know If We&apos;re the Right Partner?</h2>
           <p className="mx-auto mt-4 max-w-xl text-body-lg text-gray-medium">

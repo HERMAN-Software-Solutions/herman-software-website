@@ -50,7 +50,7 @@ export function ContactForm() {
           </svg>
         </div>
         <h3 className="mb-2">Message Sent!</h3>
-        <p className="text-charcoal">
+        <p className="text-foreground">
           Thank you for reaching out. We typically respond within 24 hours.
         </p>
       </div>
@@ -64,6 +64,18 @@ export function ContactForm() {
           {error}
         </div>
       )}
+      <FormSelect
+        label="Which department do you need?"
+        name="department"
+        required
+        options={[
+          { value: "general", label: "General Inquiry" },
+          { value: "sales", label: "New Project / Request a Quote" },
+          { value: "support", label: "Support (Existing Client)" },
+          { value: "careers", label: "Careers / Internships" },
+          { value: "partnership", label: "Partnership / Collaboration" },
+        ]}
+      />
       <FormInput label="Full Name" name="name" placeholder="Your full name" required />
       <FormInput label="Email Address" name="email" type="email" placeholder="you@example.com" required />
       <FormInput label="Phone Number" name="phone" type="tel" placeholder="+256 XXX XXXXXX" />

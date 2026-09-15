@@ -14,7 +14,7 @@ export default async function PortfolioPage() {
 
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">Projects We&apos;re Proud Of</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -22,7 +22,7 @@ export default async function PortfolioPage() {
           </p>
         </div>
       </section>
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <PortfolioContent projects={projects} />
         </div>

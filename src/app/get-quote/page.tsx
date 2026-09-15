@@ -10,7 +10,7 @@ export const metadata: Metadata = generatePageMetadata({
 export default function QuotePage() {
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">Tell Us About Your Project</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -20,7 +20,7 @@ export default function QuotePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-2xl">
           <QuoteForm />
         </div>

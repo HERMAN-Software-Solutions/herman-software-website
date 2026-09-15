@@ -75,6 +75,7 @@ export function buildContactEmail(data: {
   email: string;
   phone?: string;
   company?: string;
+  department?: string;
   service?: string;
   message: string;
 }) {
@@ -87,16 +88,31 @@ export function buildContactEmail(data: {
     "other": "Other / Not Sure",
   };
 
+  const departmentLabels: Record<string, string> = {
+    general: "General",
+    sales: "Sales",
+    support: "Support",
+    careers: "Careers",
+    partnership: "Partnership",
+  };
+
+  const deptKey = data.department || "general";
+  const deptLabel = departmentLabels[deptKey] || "General";
+
   return {
-    subject: `New Contact Form Submission from ${data.name}`,
+    subject: `[${deptLabel}] New Contact Form Submission from ${data.name}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #0A1F3F;">New Contact Form Submission</h2>
+        <p style="display:inline-block; background:#00C2BA; color:#fff; padding:4px 12px; border-radius:12px; font-size:13px; font-weight:bold; margin-bottom:16px;">
+          Department: ${deptLabel}
+        </p>
         <table style="width: 100%; border-collapse: collapse;">
           <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Name</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.name}</td></tr>
           <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Email</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.email}</td></tr>
           ${data.phone ? `<tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Phone</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.phone}</td></tr>` : ""}
           ${data.company ? `<tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Company</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.company}</td></tr>` : ""}
+          <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Department</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${deptLabel}</td></tr>
           ${data.service ? `<tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Service Interest</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${serviceLabels[data.service] || data.service}</td></tr>` : ""}
         </table>
         <h3 style="color: #0A1F3F; margin-top: 20px;">Message</h3>
@@ -143,10 +159,13 @@ export function buildQuoteEmail(data: {
   };
 
   return {
-    subject: `New Quote Request from ${data.name}${data.company ? " - " + data.company : ""}`,
+    subject: `[Sales] New Quote Request from ${data.name}${data.company ? " - " + data.company : ""}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #0A1F3F;">New Quote Request</h2>
+        <p style="display:inline-block; background:#00C2BA; color:#fff; padding:4px 12px; border-radius:12px; font-size:13px; font-weight:bold; margin-bottom:16px;">
+          Department: Sales
+        </p>
         <table style="width: 100%; border-collapse: collapse;">
           <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Name</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.name}</td></tr>
           <tr><td style="padding: 8px; border-bottom: 1px solid #E2E8F0; font-weight: bold;">Email</td><td style="padding: 8px; border-bottom: 1px solid #E2E8F0;">${data.email}</td></tr>

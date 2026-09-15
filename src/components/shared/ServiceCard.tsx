@@ -21,7 +21,7 @@ export function ServiceCard({ icon, title, description, href, className }: Servi
         {icon}
       </div>
       <h3 className="text-h4 transition-colors group-hover:text-teal">{title}</h3>
-      <p className="text-body-sm text-charcoal">{description}</p>
+      <p className="text-body-sm text-foreground">{description}</p>
       <span className="mt-auto text-body-sm font-medium text-teal group-hover:underline">
         Learn more →
       </span>

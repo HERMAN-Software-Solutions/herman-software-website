@@ -29,12 +29,12 @@ export function BlogSearch({ onSearch }: BlogSearchProps) {
         value={query}
         onChange={handleChange}
         placeholder="Search blog posts..."
-        className="w-full rounded-lg border border-gray-light bg-white py-3 pl-10 pr-10 text-body text-charcoal placeholder:text-gray-medium focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal dark:bg-navy dark:border-navy-light dark:text-white"
+        className="w-full rounded-lg border border-gray-light bg-surface py-3 pl-10 pr-10 text-body text-foreground placeholder:text-gray-medium focus:border-teal focus:outline-none focus:ring-1 focus:ring-teal dark:bg-navy-dark dark:border-navy-light dark:text-white"
       />
       {query && (
         <button
           onClick={handleClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-medium hover:text-charcoal dark:hover:text-white"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-medium hover:text-foreground dark:hover:text-white"
         >
           <X className="h-5 w-5" />
         </button>

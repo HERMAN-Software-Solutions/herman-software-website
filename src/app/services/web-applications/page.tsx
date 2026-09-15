@@ -3,7 +3,7 @@ import { Button } from "@/components/shared/Button";
 export default function WebApplicationsPage() {
   return (
     <>
-      <section className="bg-navy py-20 text-center">
+      <section className="bg-navy-dark py-20 text-center">
         <div className="container-site">
           <h1 className="text-white">Web & Cloud Applications</h1>
           <p className="mx-auto mt-4 max-w-2xl text-body-lg text-gray-medium">
@@ -12,10 +12,10 @@ export default function WebApplicationsPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site mx-auto max-w-3xl">
           <h2 className="mb-6">Fast, Scalable, Secure Web Solutions</h2>
-          <p className="mb-4 text-body text-charcoal">
+          <p className="mb-4 text-body text-foreground">
             From corporate websites that convert visitors into clients, to complex web applications
             handling thousands of transactions daily — we build for speed, security, and scale. Every
             web application we deliver is responsive, accessible, optimized for search engines, and
@@ -38,7 +38,7 @@ export default function WebApplicationsPage() {
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <span className="text-body-sm font-medium text-navy">{item}</span>
+                <span className="text-body-sm font-medium text-heading">{item}</span>
               </div>
             ))}
           </div>
@@ -46,7 +46,7 @@ export default function WebApplicationsPage() {
           <h3 className="mb-4">Typical Technology Stack</h3>
           <div className="mb-8 flex flex-wrap gap-2">
             {["Next.js", "React", "Tailwind CSS", "Node.js", "MongoDB", "PostgreSQL", "Vercel", "AWS"].map((tech) => (
-              <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-navy">
+              <span key={tech} className="rounded-full bg-navy/5 px-4 py-1.5 text-sm font-medium text-heading">
                 {tech}
               </span>
             ))}

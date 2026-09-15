@@ -26,7 +26,7 @@ export default function BlogCategoryPage({ params }: { params: { category: strin
 
   return (
     <>
-      <section className="bg-navy py-16 text-center">
+      <section className="bg-navy-dark py-16 text-center">
         <div className="container-site">
           <h1 className="text-white">{activeCategory}</h1>
           <p className="mt-4 text-body-lg text-gray-medium">
@@ -35,7 +35,7 @@ export default function BlogCategoryPage({ params }: { params: { category: strin
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-surface">
         <div className="container-site">
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2">

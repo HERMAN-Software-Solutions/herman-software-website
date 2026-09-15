@@ -18,7 +18,7 @@ export function BlogSidebar({ categories, activeCategory, onCategoryChange }: Bl
     <aside className="space-y-8">
       {/* Categories */}
       <div>
-        <h4 className="mb-4 text-body-sm font-semibold uppercase tracking-wider text-charcoal">
+        <h4 className="mb-4 text-body-sm font-semibold uppercase tracking-wider text-foreground">
           Categories
         </h4>
         <ul className="space-y-2">
@@ -27,7 +27,7 @@ export function BlogSidebar({ categories, activeCategory, onCategoryChange }: Bl
               href="/blog"
               onClick={(e) => handleCategoryClick(null, e)}
               className={`text-body-sm transition-colors hover:text-teal ${
-                !activeCategory ? "font-medium text-teal" : "text-charcoal"
+                !activeCategory ? "font-medium text-teal" : "text-foreground"
               }`}
             >
               All Posts
@@ -39,7 +39,7 @@ export function BlogSidebar({ categories, activeCategory, onCategoryChange }: Bl
                 href={`/blog/category/${category.toLowerCase().replace(/\s+/g, "-")}`}
                 onClick={(e) => handleCategoryClick(category, e)}
                 className={`text-body-sm transition-colors hover:text-teal ${
-                  activeCategory === category ? "font-medium text-teal" : "text-charcoal"
+                  activeCategory === category ? "font-medium text-teal" : "text-foreground"
                 }`}
               >
                 {category}
@@ -50,7 +50,7 @@ export function BlogSidebar({ categories, activeCategory, onCategoryChange }: Bl
       </div>
 
       {/* CTA */}
-      <div className="rounded-card bg-navy p-6 text-center">
+      <div className="rounded-card bg-navy-dark p-6 text-center">
         <h4 className="mb-2 text-white">Need a Software Partner?</h4>
         <p className="mb-4 text-body-sm text-gray-medium">
           Let&apos;s discuss your project — free consultation.

@@ -16,7 +16,7 @@ export function FeaturedWork() {
   const featured = projects.slice(0, 3);
 
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-surface">
       <div className="container-site">
         <SectionHeading
           title="Selected Projects"
