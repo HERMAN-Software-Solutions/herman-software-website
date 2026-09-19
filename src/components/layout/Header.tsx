@@ -5,7 +5,10 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import { NavDropdown } from "@/components/layout/NavDropdown";
 import { getNavigation, getSiteSettings } from "@/sanity/queries";
+
+const DROPDOWN_ITEMS = ["Pricing", "Careers", "Internships"];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,6 +21,11 @@ export function Header() {
     getNavigation().then(setNavLinks);
     getSiteSettings().then(setSettings);
   }, []);
+
+  // Filter out dropdown items from the flat nav list
+  const flatNavLinks = navLinks.filter(
+    (link) => !DROPDOWN_ITEMS.includes(link.label)
+  );
 
   return (
     <>
@@ -40,11 +48,29 @@ export function Header() {
             </a>
 
             <nav className="hidden lg:flex lg:items-center lg:gap-1">
-              {navLinks.map((link) => (
-                <a key={link.label} href={link.href} className={cn("rounded-md px-3 py-2 text-body-sm font-medium transition-colors", isActive(link.href) ? "text-teal" : "text-foreground hover:text-teal dark:text-foreground dark:hover:text-teal")}>
+              {flatNavLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-body-sm font-medium transition-colors",
+                    isActive(link.href)
+                      ? "text-teal"
+                      : "text-foreground hover:text-teal dark:text-foreground dark:hover:text-teal"
+                  )}
+                >
                   {link.label}
                 </a>
               ))}
+
+              <NavDropdown
+                label="Company"
+                items={[
+                  { label: "Pricing", href: "/pricing" },
+                  { label: "Careers", href: "/careers" },
+                  { label: "Internships", href: "/internships" },
+                ]}
+              />
             </nav>
 
             <div className="hidden lg:flex lg:items-center lg:gap-2">
